@@ -5,6 +5,9 @@ import { DisplayContactInfoComponent } from './components/display-contact-info/d
 import { RouterOutlet } from '@angular/router';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 
+import { HasPermissionDirective } from './directives/permission.directive';
+import { PermissionService } from './services/permission.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,7 +15,8 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
     DisplayLogoComponent,
     DisplayContactInfoComponent,
     RouterOutlet,
-    ModalWindowComponent],
+    ModalWindowComponent,
+    HasPermissionDirective  ],
     
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -20,10 +24,15 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 
 export class AppComponent { 
 
-  constructor() {}
+  constructor(private permissionService: PermissionService) {}
 
   config: any;
 
-  ngOnInit() {} 
+  ngOnInit() {
+
+    // Mock permissions for testing
+    this.permissionService.setUserPermissions(['public','edit_posts']); 
+
+  } 
 
 }
