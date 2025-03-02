@@ -112,6 +112,12 @@ button
   color: white !important;
 }
 
+//remove background color from button
+.btn-no-color
+{
+  background-color: transparent !important;
+}
+
 /* Used to pop elements in and out */
 
 .pop-in {
