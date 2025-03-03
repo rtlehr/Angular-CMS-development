@@ -18,6 +18,7 @@ import { InfoHighlightComponent } from '../../cards/info-highlight/info-highligh
 import { BusinessCardComponent } from '../../cards/business-card/business-card.component';
 import { ContentTabsComponent } from '../../content-tabs/content-tabs.component';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { PermissionService } from '../../../services/permission.service';
 
 @Component({
   selector: 'app-blog-details', 
@@ -32,7 +33,6 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
             FormGeneratorComponent,
             ContentTabsComponent,
             RouterModule, 
-            RouterOutlet,
             InfoHighlightComponent,
             BusinessCardComponent],
   templateUrl: './blog-details.component.html',
@@ -45,6 +45,7 @@ export class BlogDetailsComponent {
     private activatedRoute: ActivatedRoute,
     private blogService: BlogService,
     private location: Location,
+    private permissionService: PermissionService
   ) {}
 
   blogPost: BlogPost | null = null;
@@ -59,7 +60,11 @@ export class BlogDetailsComponent {
   
   blogURL: String = "";
 
+  permissions: any[] = [];
+  
   ngOnInit(): void {
+
+    this.permissions = this.permissionService.getPermissionsArray();
 
     this.activatedRoute.paramMap.subscribe((params) => {
       const blogUrl = params.get('url'); // Extract blog URL from the route parameters
@@ -79,7 +84,7 @@ export class BlogDetailsComponent {
 
           if (url) {
             this.blogService.getPostByURL(this.blogPostsUrl, url).subscribe(
-              (post) => (this.blogPost = post),
+              (post) => (this.blogPost = post),              
               (error) => (this.error = 'Failed to load blog post')
             );
           } else {
@@ -97,15 +102,17 @@ export class BlogDetailsComponent {
       }
     });
 
-
   }
 
-  get getAllBlogPosts() {
+  filterContentByPermissions(contentArray: any[], permissions: string[]): any[] {
 
-    return this.blogAllPost;
+    return contentArray.filter(item => {
+      // If the object has no 'permission' property or the permission is in the provided 'permissions' array
+      return !item.permission || permissions.includes(item.permission);
+    });
 
   }
-
+  
   closeSidebar() {
     const sidebarElement = document.getElementById('sidebarMenu');
     if (sidebarElement) {
