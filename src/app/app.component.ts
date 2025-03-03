@@ -1,4 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
 import { DisplayLogoComponent } from './components/display-logo/display-logo.component';
 import { DisplayContactInfoComponent } from './components/display-contact-info/display-contact-info.component';
@@ -11,28 +13,33 @@ import { PermissionService } from './services/permission.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderMenuComponent,
+  imports: [
+    HeaderMenuComponent,
     DisplayLogoComponent,
     DisplayContactInfoComponent,
     RouterOutlet,
     ModalWindowComponent,
-    HasPermissionDirective  ],
-    
+    HasPermissionDirective
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
+export class AppComponent {
+  bobValue: string | null = null;
 
-export class AppComponent { 
-
-  constructor(private permissionService: PermissionService) {}
-
-  config: any;
+  constructor(
+    private permissionService: PermissionService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.activatedRoute.queryParamMap.subscribe((params) => {
+      this.bobValue = params.get('bob'); // Get the 'bob' query parameter
 
-    // Mock permissions for testing
-    this.permissionService.setUserPermissions(['public','edit_posts']); 
-
-  } 
-
+      if (this.bobValue) {
+        this.permissionService.setUserPermissions(['public', this.bobValue]); // Set permission
+        console.log('Permissions Set:', [this.bobValue]);
+      }
+    });
+  }
 }

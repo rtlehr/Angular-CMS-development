@@ -26,9 +26,7 @@ export const routes: Routes = [
     path: 'cms-information', 
     component: ContentBlankPageComponent,
     title: "CMS Information",
-    canActivate: [permissionGuard], 
     data: {
-      permission: 'public',
       menu: true,
       pageContent: []
     },
@@ -37,9 +35,7 @@ export const routes: Routes = [
         path: 'cms-components',
         component: ContentWithSideMenuComponent,
         title: 'CMS Components',
-        canActivate: [permissionGuard],
         data: {
-          permission: 'public',
           menu: true, 
           pageContent: [
             { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/component-samples/news/news.html" },

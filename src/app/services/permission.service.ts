@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PermissionService {
-  private userPermissions: string[] = [];
+  private userPermissions = new BehaviorSubject<string[]>([]); // Observable permissions
 
-  constructor() {}
-
-  setUserPermissions(permissions: string[]): void {
-    this.userPermissions = permissions;
+  setUserPermissions(permissions: string[]) {
+    this.userPermissions.next(permissions); // Update permissions
   }
 
   hasPermission(permission: string): boolean {
-    return this.userPermissions.includes(permission);
+    return this.userPermissions.getValue().includes(permission);
+  }
+
+  getPermissions() {
+    return this.userPermissions.asObservable(); // Allow components to reactively update
   }
 }
