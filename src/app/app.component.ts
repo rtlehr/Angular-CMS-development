@@ -25,7 +25,8 @@ import { PermissionService } from './services/permission.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  bobValue: string | null = null;
+
+  permissionValue: any[] = ['public'];
 
   constructor(
     private permissionService: PermissionService,
@@ -33,13 +34,26 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
+    
     this.activatedRoute.queryParamMap.subscribe((params) => {
-      this.bobValue = params.get('bob'); // Get the 'bob' query parameter
 
-      if (this.bobValue) {
-        this.permissionService.setUserPermissions(['public', this.bobValue]); // Set permission
-        console.log('Permissions Set:', [this.bobValue]);
+      const pvArray = params.get('pv')?.split(",");
+
+      if(pvArray)
+      {
+
+        for(let count=0;count<pvArray.length;count++)
+        {
+          this.permissionValue.push(pvArray[count]); // Get the 'bob' query parameter
+        }
+
+        if (this.permissionValue) {
+          this.permissionService.setUserPermissions(this.permissionValue); // Set permission
+          console.log('Permissions Set:', [this.permissionValue]);
+        }
+
       }
+
     });
   }
 }

@@ -17,7 +17,7 @@ export const routes: Routes = [
       menu: true,
       pageContent: [
         { contentType: "contentPage", divId: "homeContentOne", contentFile: "content/pages/home/home-content-one.html" },
-        { contentType: "contentPage", divId: "homeContentTwo", contentFile: "content/pages/home/home-content-two.html" }
+        { contentType: "contentPage", permission: "admin", divId: "homeContentTwo", contentFile: "content/pages/home/home-content-two.html" }
       ]
     }
   },

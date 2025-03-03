@@ -12,10 +12,15 @@ export class PermissionService {
   }
 
   hasPermission(permission: string): boolean {
-    return this.userPermissions.getValue().includes(permission);
+    return this.userPermissions.getValue().includes(permission); 
   }
 
   getPermissions() {
     return this.userPermissions.asObservable(); // Allow components to reactively update
   }
-}
+
+  getPermissionsArray() {
+    return this.userPermissions.value; // Allow components to reactively update
+  }
+
+} 

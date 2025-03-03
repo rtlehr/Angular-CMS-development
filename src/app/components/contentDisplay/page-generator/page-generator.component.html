@@ -1,6 +1,6 @@
 <div [id]="divId" class="basePageContent">
 
-        @for (pageContent of getPageContent; track pageContent.contentFile) {
+        @for (pageContent of pageContent; track pageContent.contentFile) {
 
             <div [id]="divId + '-content-' + ($index+1)" class="basePageContentHolder">
 

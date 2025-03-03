@@ -14,6 +14,8 @@ import { BusinessCardComponent } from '../../cards/business-card/business-card.c
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
+import { PermissionService } from '../../../services/permission.service';
+
 @Component({
   selector: 'app-page-generator',
   standalone: true, 
@@ -33,34 +35,43 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PageGeneratorComponent {
 
-  
-  //@Input() pageContent: any[] = [];
-
   divId: String = "";
   
-  pageContent: pageContent [] = [];
+  pageContent: pageContent[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  permissions: any[] = [];
 
-  ngOnInit()
-  {
+  constructor(private activatedRoute: ActivatedRoute, 
+              private router: Router,
+              private permissionService: PermissionService) {}
 
-      this.pageContent = this.activatedRoute.snapshot.data['pageContent']; 
+  ngOnInit() {
 
-      const currentRoutePath = this.activatedRoute.snapshot.routeConfig?.path || "";
+    this.permissions = this.permissionService.getPermissionsArray();
 
-      // Generate the dynamic div ID by concatenating "-div"
-      this.divId = `${currentRoutePath}-div`;
+    console.log("Permissions");
+    console.table(this.permissions);
 
-      console.log('Dynamic Div ID:', this.divId); // Debugging log
+    //this.pageContent = this.activatedRoute.snapshot.data['pageContent']; 
+
+    this.pageContent = this.filterContentByPermissions(this.activatedRoute.snapshot.data['pageContent'], this.permissions);
+
+    const currentRoutePath = this.activatedRoute.snapshot.routeConfig?.path || "";
+    this.divId = `${currentRoutePath}-div`;
     
+    console.log('Dynamic Div ID:', this.divId);
   }
 
-  get getPageContent() {
+  filterContentByPermissions(contentArray: any[], permissions: string[]): any[] {
 
-    return this.pageContent;
+    return contentArray.filter(item => {
+      // If the object has no 'permission' property or the permission is in the provided 'permissions' array
+      return !item.permission || permissions.includes(item.permission);
+    });
 
   }
+
+  
 
 }
 
