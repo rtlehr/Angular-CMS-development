@@ -21,7 +21,7 @@
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc diam nisl, blandit at sodales nec, elementum bibendum libero. Nunc finibus ",
       "tags": ["Tag One", "Tag Two"],
       "imageUrl": "./assets/images/airplane.jpeg", 
-      "blogText": [{"contentType": "contentPage", "divId": "contentBlockTwo", "contentFile": "content/pages/blog/post-two/content.html"}]
+      "blogText": [{"contentType": "contentPage", "permission": "admin", "divId": "contentBlockTwo", "contentFile": "content/pages/blog/post-two/content.html"}]
     },
     {
       "id": 3,

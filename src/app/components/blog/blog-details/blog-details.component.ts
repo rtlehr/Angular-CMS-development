@@ -1,12 +1,11 @@
 declare var bootstrap: any;
 
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '../../../services/blog.service';
 import { BlogPost } from '../../../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
-import { pageContent } from '../../../models/page-content.model';
 import { MainContentComponent } from '../../main-content/main-content.component';
 import { ImageGalleryComponent } from '../../image-gallery/image-gallery.component';
 import { ImageDisplayComponent } from '../../image-display/image-display.component';
@@ -17,29 +16,41 @@ import { FormGeneratorComponent } from '../../form-generator/form-generator.comp
 import { InfoHighlightComponent } from '../../cards/info-highlight/info-highlight.component';
 import { BusinessCardComponent } from '../../cards/business-card/business-card.component';
 import { ContentTabsComponent } from '../../content-tabs/content-tabs.component';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { PermissionService } from '../../../services/permission.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-blog-details', 
+  selector: 'app-blog-details',
   standalone: true,
-  imports: [CommonModule,
-            MainContentComponent,
-            ImageDisplayComponent,
-            ImageGalleryComponent,
-            ImageSliderComponent,
-            NewsComponent,
-            FaqComponent,
-            FormGeneratorComponent,
-            ContentTabsComponent,
-            RouterModule, 
-            InfoHighlightComponent,
-            BusinessCardComponent],
+  imports: [
+    CommonModule,
+    MainContentComponent,
+    ImageDisplayComponent,
+    ImageGalleryComponent,
+    ImageSliderComponent,
+    NewsComponent,
+    FaqComponent,
+    FormGeneratorComponent,
+    ContentTabsComponent,
+    RouterModule,
+    InfoHighlightComponent,
+    BusinessCardComponent,
+  ],
   templateUrl: './blog-details.component.html',
-  styleUrl: './blog-details.component.scss',
+  styleUrls: ['./blog-details.component.scss'],
   providers: [BlogService],
 })
-export class BlogDetailsComponent {
+export class BlogDetailsComponent implements OnInit, OnDestroy {
+  blogPost: BlogPost | null = null;
+  blogPosts: BlogPost[] = [];
+  error: string | null = null;
+  baseBlogUrl: string = '';
+  blogPostsUrl: string = '';
+  permissions: string[] = [];
+  currentBlogSlug: string = '';
+
+  private routeSubscription!: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,80 +59,74 @@ export class BlogDetailsComponent {
     private permissionService: PermissionService
   ) {}
 
-  blogPost: BlogPost | null = null;
-
-  blogAllPost: BlogPost[] = [];
-
-  blogPostsUrl: string = ''; 
-
-  error: string | null = null;
-
-  pageContent: pageContent [] = [];
-  
-  blogURL: String = "";
-
-  permissions: any[] = [];
-  
   ngOnInit(): void {
-
     this.permissions = this.permissionService.getPermissionsArray();
 
-    this.activatedRoute.paramMap.subscribe((params) => {
-      const blogUrl = params.get('url'); // Extract blog URL from the route parameters
-
-      if (blogUrl) {
-
-          const currurl = this.location.path();
-
-          const cleanedURL = currurl.split("/").slice(0, -1).join("/");
-
-          this.blogURL = cleanedURL;
-
-          this.blogPostsUrl = "assets/content/pages" + cleanedURL + "/blog-posts.json"; 
-
-          // Retrieve the blog post ID from the route parameters
-          const url = String(this.activatedRoute.snapshot.paramMap.get('url'));
-
-          if (url) {
-            this.blogService.getPostByURL(this.blogPostsUrl, url).subscribe(
-              (post) => (this.blogPost = post),              
-              (error) => (this.error = 'Failed to load blog post')
-            );
-          } else {
-            this.error = 'Invalid blog post ID';
-          }
-
-          this.blogService.getAllPosts(this.blogPostsUrl).subscribe({
-            next: (posts) => (this.blogAllPost = posts),
-            error: (err) => (this.error = 'Failed to load blog posts: ' + err.message),
-          });
-
-
-      } else {
+    this.routeSubscription = this.activatedRoute.paramMap.subscribe(params => {
+      const slug = params.get('url');
+      if (!slug) {
         this.error = 'Invalid blog URL';
+        return;
+      }
+      this.currentBlogSlug = slug;
+
+      // Construct the base URL from the current location path.
+      const currentPath = this.location.path();
+      const cleanedPath = currentPath.split('/').slice(0, -1).join('/');
+      this.baseBlogUrl = cleanedPath;
+      this.blogPostsUrl = `assets/content/pages${cleanedPath}/blog-posts.json`;
+
+      this.loadBlogPost(this.currentBlogSlug);
+      this.loadAllBlogPosts();
+    });
+  }
+
+  private loadBlogPost(slug: string): void {
+    this.blogService.getPostByURL(this.blogPostsUrl, slug).subscribe({
+      next: post => {
+        post.blogText = this.filterContentByPermissions(post.blogText, this.permissions);
+        this.blogPost = post;
+      },
+      error: err => {
+        console.error('Error loading blog post', err);
+        this.error = 'Failed to load blog post';
       }
     });
+  }
 
+  private loadAllBlogPosts(): void {
+    this.blogService.getAllPosts(this.blogPostsUrl).subscribe({
+      next: posts => (this.blogPosts = posts),
+      error: err => {
+        console.error('Error loading blog posts', err);
+        this.error = 'Failed to load blog posts: ' + err.message;
+      }
+    });
   }
 
   filterContentByPermissions(contentArray: any[], permissions: string[]): any[] {
-
-    return contentArray.filter(item => {
-      // If the object has no 'permission' property or the permission is in the provided 'permissions' array
-      return !item.permission || permissions.includes(item.permission);
-    });
-
+    return contentArray.filter(item => !item.permission || permissions.includes(item.permission));
   }
-  
-  closeSidebar() {
+
+  closeSidebar(): void {
     const sidebarElement = document.getElementById('sidebarMenu');
     if (sidebarElement) {
       const bsOffcanvas = bootstrap.Offcanvas.getInstance(sidebarElement);
-      if (bsOffcanvas) {
-        bsOffcanvas.hide(); // Properly close offcanvas
-      }
+      bsOffcanvas?.hide();
     }
   }
 
+  trackByBlogId(index: number, blog: BlogPost): number {
+    return blog.id;
+  }
 
+  trackByContentId(index: number, content: any): number {
+    return content.id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+  }
 }
