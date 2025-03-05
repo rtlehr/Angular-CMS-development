@@ -5,6 +5,7 @@ import { ContentWithSideMenuComponent } from './components/contentDisplay/conten
 import { ContentBlankPageComponent } from './components/contentDisplay/content-blank-page/content-blank-page.component';
 import { BlogDetailsComponent } from './components/blog/blog-details/blog-details.component';
 import { permissionGuard } from './guards/permission.guard';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -206,6 +207,18 @@ export const routes: Routes = [
   { 
     path: 'blog/:url',
     component: BlogDetailsComponent 
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent, 
+    title: "Login",
+    data: {
+      menu: true,
+      pageContent: [
+        { contentType: "contentPage", divId: "homeContentOne", contentFile: "content/pages/home/home-content-one.html" },
+        { contentType: "contentPage", permission: "admin", divId: "homeContentTwo", contentFile: "content/pages/home/home-content-two.html" }
+      ]
+    }
   },
   
   { 
