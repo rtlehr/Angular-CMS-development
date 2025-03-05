@@ -1,49 +1,52 @@
 <div class="d-flex flex-column min-vh-100">
-  
-  <!-- Header -->
-  <header class="bg-primary text-white text-center py-3"> 
-    <div class="container mt-3">
-      <div class="row align-items-center text-center text-md-start">
-        <div class="col-lg-2 col-md-3 col-12 mb-2 mb-md-0"> 
-          <app-display-logo [src]="'myLogo.png'" [width]="'100px'" [height]="'100px'"/> 
+
+  <!-- Header (Scrolls Out) -->
+  <header id="pageHeader" class="bg-primary text-white py-3 shadow">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-2 col-md-3 col-6">
+          <app-display-logo [src]="'myLogo.png'" [width]="'80px'" [height]="'80px'"/>
         </div>
-        <div class="col-lg-9 col-md-7 col-12">
-          <h1 class="header-title">My Angular CMS</h1>
+        <div class="col-lg-8 col-md-6 text-center text-md-start">
+          <h1 class="header-title fw-bold">My Angular CMS</h1>
         </div>
-        <div class="col-lg-1 col-md-2 col-12">
+        <div class="col-lg-2 col-md-3 col-6 text-end">
           <app-display-contact-info [socialOnly]="true"/> 
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary text-white">
-    <div class="container-fluid">
+  <!-- Navigation (Will Stick to the Top on Scroll) -->
+  <nav id="stickyNavbar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container">
       <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#headerNavbar" aria-controls="headerNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-left" id="headerNavbar">
+      <div class="collapse navbar-collapse justify-content-center" id="headerNavbar">
         <app-header-menu/>
       </div>
     </div>
   </nav>
 
+  <!-- Placeholder (Prevents Layout Shift) -->
+  <div id="navbarPlaceholder"></div>
+
   <!-- Main Content -->
-  <main class="flex-grow-1 pageContent">
-
-    <router-outlet></router-outlet>    
-
-    <app-modal-window/>
-    
-    <button *appHasPermission="'edit_posts'">Edit Post</button>
-    
+  <main class="flex-grow-1 page-content py-5">
+    <div class="container">
+      <router-outlet></router-outlet>
+      <app-modal-window/>
+      <button *appHasPermission="'edit_posts'" class="btn btn-primary mt-4">Edit Post</button>
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2024 My Angular App. All rights reserved.</p>
-    <app-display-contact-info [socialOnly]="false"/>
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-2">&copy; 2024 My Angular App. All rights reserved.</p>
+      <app-display-contact-info [socialOnly]="false"/>
+    </div>
   </footer>
 
 </div>

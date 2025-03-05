@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
@@ -19,12 +19,17 @@ import { PermissionService } from './services/permission.service';
     DisplayContactInfoComponent,
     RouterOutlet,
     ModalWindowComponent,
-    HasPermissionDirective
+    HasPermissionDirective,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  private lastScrollTop = 0;
+  private header!: HTMLElement | null;
+  private navbar!: HTMLElement | null;
+  private navbarPlaceholder!: HTMLElement | null;
 
   permissionValue: any[] = ['public'];
 
@@ -35,6 +40,12 @@ export class AppComponent {
 
   ngOnInit() {
     
+    this.header = document.getElementById("pageHeader");
+    this.navbar = document.getElementById("stickyNavbar");
+    this.navbarPlaceholder = document.getElementById("navbarPlaceholder");
+
+    window.addEventListener("scroll", this.handleScroll.bind(this));
+
     this.activatedRoute.queryParamMap.subscribe((params) => {
 
       const pvArray = params.get('pv')?.split(",");
@@ -56,4 +67,31 @@ export class AppComponent {
 
     });
   }
+
+  @HostListener("window:scroll", [])
+  handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (this.header && this.navbar && this.navbarPlaceholder) {
+      // When Scrolling Down → Hide Header
+      if (scrollTop > this.lastScrollTop) {
+        this.header.style.transform = "translateY(-100%)";
+      } else {
+        // When Scrolling Up → Show Header
+        this.header.style.transform = "translateY(0)";
+      }
+
+      // If Navbar Reaches the Top, Stick It
+      if (scrollTop >= this.header.clientHeight) {
+        this.navbar.classList.add("navbar-sticky");
+        this.navbarPlaceholder.style.display = "block"; // Prevents jump
+      } else {
+        this.navbar.classList.remove("navbar-sticky");
+        this.navbarPlaceholder.style.display = "none";
+      }
+    }
+
+    this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  }
+
 }
