@@ -9,31 +9,8 @@ import { PermissionService } from '../../services/permission.service';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  template: `
-    <div class="login-container">
-      <h2>Login</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div>
-          <label for="email">Email:</label>
-          <input id="email" type="email" formControlName="email" />
-          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-            A valid email is required.
-          </div>
-        </div>
-        <div>
-          <label for="password">Password:</label>
-          <input id="password" type="password" formControlName="password" />
-          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-            Password is required.
-          </div>
-        </div>
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
-        <div *ngIf="error" style="color: red;">
-          {{ error }}
-        </div>
-      </form>
-    </div>
-  `
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
