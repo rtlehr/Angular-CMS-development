@@ -1,9 +1,0 @@
-<p>json-loader works!</p>
-<div *ngIf="jsonData; else loading">
-    <pre>{{ jsonData | json }}</pre>
-    <p>{{ jsonData[0].name }}</p>
-  </div>
-  <ng-template #loading>
-    <p>Loading JSON data...</p>
-  </ng-template>
-

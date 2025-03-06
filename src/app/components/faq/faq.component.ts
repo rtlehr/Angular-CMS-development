@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { JsonDataService } from '../../services/json-data.service';
 
 @Component({
@@ -6,38 +6,35 @@ import { JsonDataService } from '../../services/json-data.service';
   standalone: true,
   imports: [],
   templateUrl: './faq.component.html',
-  styleUrl: './faq.component.css'
+  styleUrls: ['./faq.component.scss']
 })
-export class FaqComponent {
+export class FaqComponent implements OnInit, OnChanges {
 
   faqs: any[] = [];
 
+  @Input() fileToLoad: string = '';
+  @Input() divId: string = '';
+
   constructor(private jsonDataService: JsonDataService) {}
 
-  @Input() fileToLoad: String = '';
-
-  @Input() divId: String = '';
-
-  ngOnChanges(changes: SimpleChanges): void { 
-
-    if (changes['fileToLoad']) {
-
-      if(changes['fileToLoad'].currentValue != "")
-      {
-        this.loadfaqs(changes['fileToLoad'].currentValue);
-      } 
-
+  ngOnInit(): void {
+    console.log("ngOnInit in FaqComponent");
+    if (this.fileToLoad) {
+      this.loadFaqs(this.fileToLoad);
     }
-
   }
 
-  loadfaqs(contentToLoad: String)
-  {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ngOnChanges in FaqComponent", changes);
+    if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
+      this.loadFaqs(changes['fileToLoad'].currentValue);
+    }
+  }
 
+  loadFaqs(contentToLoad: string): void {
     this.jsonDataService.loadData('assets/' + contentToLoad).subscribe(() => {
       this.faqs = this.jsonDataService.getData();
     });
-
   }
 
   get getFaqs() {
@@ -57,6 +54,4 @@ export class FaqComponent {
       topElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
 }
- 

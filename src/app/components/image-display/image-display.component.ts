@@ -1,52 +1,47 @@
-import { CommonModule} from '@angular/common';
-import { Component, Input, SimpleChanges  } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { JsonDataService } from '../../services/json-data.service';
-
 
 @Component({
   selector: 'app-image-display',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './image-display.component.html',
-  styleUrl: './image-display.component.css'
+  styleUrls: ['./image-display.component.scss']
 })
-export class ImageDisplayComponent {
+export class ImageDisplayComponent implements OnInit, OnChanges {
 
   images: any[] = [];
+  selectedImage: any = null;
+
+  @Input() fileToLoad: string = '';
+  @Input() divId: string = '';
 
   constructor(private jsonDataService: JsonDataService) {}
 
-  @Input() fileToLoad: String = '';
-
-  @Input() divId: String = '';
-
-  ngOnChanges(changes: SimpleChanges): void { 
-
-    if (changes['fileToLoad']) {
-
-      if(changes['fileToLoad'].currentValue != "")
-      {
-        this.loadimages(changes['fileToLoad'].currentValue);
-      } 
-
-    } 
-
+  ngOnInit(): void {
+    console.log("ImageDisplayComponent OnInit");
+    if (this.fileToLoad) {
+      this.loadImages(this.fileToLoad);
+    }
   }
 
-  loadimages(contentToLoad: String)
-  {
-    
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ImageDisplayComponent ngOnChanges", changes);
+    if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
+      this.loadImages(changes['fileToLoad'].currentValue);
+    }
+  }
+
+  loadImages(contentToLoad: string): void {
     this.jsonDataService.loadData('assets/' + contentToLoad).subscribe(() => {
       this.images = this.jsonDataService.getData();
     });
-
   }
 
   get getImages() {
     return this.images;
   }
-
-  selectedImage: any = null;
 
   openModal(image: any): void {
     this.selectedImage = image;
@@ -55,5 +50,4 @@ export class ImageDisplayComponent {
   closeModal(): void {
     this.selectedImage = null;
   }
-
 }

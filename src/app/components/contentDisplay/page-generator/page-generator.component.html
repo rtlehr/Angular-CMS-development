@@ -1,94 +1,11 @@
 <div [id]="divId" class="basePageContent">
-
-        @for (pageContent of pageContent; track pageContent.contentFile) {
-
-            <div [id]="divId + '-content-' + ($index+1)" class="basePageContentHolder">
-
-                @if(pageContent.contentType == "contentPage")
-                {
-
-                    <app-main-content [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "imageGallery")
-                {
-
-                    <app-image-gallery [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "news")
-                {
-
-                    <app-news [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "imageDisplay")
-                {
-
-                    <app-image-display [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "faq")
-                {
-
-                    <app-faq [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "form")
-                {
-
-                    <app-form-generator [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "imageSlider")
-                {
-
-                    <app-image-slider [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-
-                }
-
-                @else if(pageContent.contentType == "tabs")
-                {
-                
-                    <app-content-tabs [fileToLoad] = "pageContent.contentFile" [divId] = "pageContent.divId"/>
-                
-                }
-
-                @else if(pageContent.contentType == "blog")
-                {
-                
-                    <app-blog-list [fileToLoad] = "pageContent.contentFile"/>
-                
-                }
-
-                @else if(pageContent.contentType == "infoHighlight")
-                {
-                
-                    <app-info-highlight [fileToLoad] = "pageContent.contentFile"/>
-                
-                }
-
-                @else if(pageContent.contentType == "businesscard")
-                {
-                
-                    <app-business-card [fileToLoad] = "pageContent.contentFile"/>
-                
-                }
-
-                @else
-                {
-
-                    <p>Select a component to display.</p> 
-
-                }
-
-            </div>
-            
-        }
-</div>
+    <ng-container *ngFor="let page of pageContents; let i = index">
+      <div [id]="divId + '-content-' + (i + 1)" class="basePageContentHolder">
+        <app-dynamic-wrapper 
+          [component]="componentMapping[page.contentType]" 
+          [inputs]="{ fileToLoad: page.contentFile, divId: page.divId }">
+        </app-dynamic-wrapper>
+      </div>
+    </ng-container>
+  </div>
+  

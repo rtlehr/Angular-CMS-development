@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainContentComponent } from '../../main-content/main-content.component';
 import { ImageGalleryComponent } from "../../image-gallery/image-gallery.component";
 import { NewsComponent } from '../../news/news.component';
@@ -8,18 +9,20 @@ import { FormGeneratorComponent } from '../../form-generator/form-generator.comp
 import { ImageSliderComponent } from '../../image-slider/image-slider.component';
 import { ContentTabsComponent } from '../../content-tabs/content-tabs.component';
 import { BlogListComponent } from '../../blog/blog-list/blog-list.component'; 
-import { pageContent } from '../../../models/page-content.model';
 import { InfoHighlightComponent } from '../../cards/info-highlight/info-highlight.component';
 import { BusinessCardComponent } from '../../cards/business-card/business-card.component';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-
+import { pageContent } from '../../../models/page-content.model';
 import { PermissionService } from '../../../services/permission.service';
+
+// Import the dynamic wrapper component
+import { DynamicWrapperComponent } from '../dynamic-wrapper/dynamic-wrapper.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-page-generator',
   standalone: true, 
-  imports: [MainContentComponent,
+  imports: [
+    MainContentComponent,
     ImageGalleryComponent,
     NewsComponent,
     FaqComponent,
@@ -29,51 +32,68 @@ import { PermissionService } from '../../../services/permission.service';
     ContentTabsComponent,
     BlogListComponent,
     InfoHighlightComponent,
-    BusinessCardComponent],
+    BusinessCardComponent,
+    CommonModule,
+    DynamicWrapperComponent  // Include the wrapper in your component’s imports
+  ],
   templateUrl: './page-generator.component.html',
-  styleUrl: './page-generator.component.scss'
+  styleUrls: ['./page-generator.component.scss']
 })
-export class PageGeneratorComponent {
+export class PageGeneratorComponent implements OnInit {
 
-  divId: String = "";
+  divId: string = "";
   
-  pageContent: pageContent[] = [];
+  // Renamed for clarity; holds the list of content items for the page.
+  pageContents: pageContent[] = [];
 
-  permissions: any[] = [];
+  // Assuming permissions are represented as strings.
+  permissions: string[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, 
-              private router: Router,
-              private permissionService: PermissionService) {}
+  // Mapping of content types to component classes.
+  componentMapping: { [key: string]: any } = {
+    contentPage: MainContentComponent,
+    imageGallery: ImageGalleryComponent,
+    news: NewsComponent,
+    faq: FaqComponent,
+    imageDisplay: ImageDisplayComponent,
+    form: FormGeneratorComponent,
+    imageSlider: ImageSliderComponent,
+    tabs: ContentTabsComponent,
+    blog: BlogListComponent,
+    infoHighlight: InfoHighlightComponent,
+    businesscard: BusinessCardComponent
+  };
 
-  ngOnInit() {
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private router: Router,
+    private permissionService: PermissionService,
+    private injector: Injector
+  ) {}
 
+  ngOnInit(): void {
+    // Retrieve permissions.
     this.permissions = this.permissionService.getPermissionsArray();
+    console.log("Permissions", this.permissions);
 
-    console.log("Permissions");
-    console.table(this.permissions);
+    // Retrieve page content data from the activated route and filter by permissions.
+    const routeData = this.activatedRoute.snapshot.data['pageContent'];
+    if (Array.isArray(routeData)) {
+      this.pageContents = this.filterContentByPermissions(routeData, this.permissions);
+    } else {
+      console.warn('No pageContent data found in route snapshot');
+    }
 
-    //this.pageContent = this.activatedRoute.snapshot.data['pageContent']; 
-
-    this.pageContent = this.filterContentByPermissions(this.activatedRoute.snapshot.data['pageContent'], this.permissions);
-
+    // Create a dynamic divId based on the current route.
     const currentRoutePath = this.activatedRoute.snapshot.routeConfig?.path || "";
     this.divId = `${currentRoutePath}-div`;
-    
     console.log('Dynamic Div ID:', this.divId);
   }
 
-  filterContentByPermissions(contentArray: any[], permissions: string[]): any[] {
-
+  filterContentByPermissions(contentArray: pageContent[], permissions: string[]): pageContent[] {
     return contentArray.filter(item => {
-      // If the object has no 'permission' property or the permission is in the provided 'permissions' array
+      // Include content if it has no associated permission or if the required permission is present.
       return !item.permission || permissions.includes(item.permission);
     });
-
   }
-
-  
-
 }
-
-
-

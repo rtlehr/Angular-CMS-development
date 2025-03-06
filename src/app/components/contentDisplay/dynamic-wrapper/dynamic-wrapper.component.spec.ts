@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JsonLoaderComponent } from './json-loader.component';
+import { DynamicWrapperComponent } from './dynamic-wrapper.component';
 
-describe('JsonLoaderComponent', () => {
-  let component: JsonLoaderComponent;
-  let fixture: ComponentFixture<JsonLoaderComponent>;
+describe('DynamicWrapperComponent', () => {
+  let component: DynamicWrapperComponent;
+  let fixture: ComponentFixture<DynamicWrapperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [JsonLoaderComponent]
+      imports: [DynamicWrapperComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(JsonLoaderComponent);
+    fixture = TestBed.createComponent(DynamicWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

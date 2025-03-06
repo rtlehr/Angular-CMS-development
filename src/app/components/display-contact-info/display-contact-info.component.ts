@@ -18,7 +18,7 @@ interface ConInfoSocial {
   standalone: true,
   imports: [],
   templateUrl: './display-contact-info.component.html',
-  styleUrls: ['./display-contact-info.component.css'], // Fixed typo
+  styleUrls: ['./display-contact-info.component.scss'], // Fixed typo
 })
 
 export class DisplayContactInfoComponent implements OnInit {

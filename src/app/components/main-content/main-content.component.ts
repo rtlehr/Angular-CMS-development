@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, Input, SimpleChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ModalWindowService } from '../../services/modal-window.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
@@ -14,9 +14,8 @@ import 'highlight.js/styles/atom-one-dark.css';
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.scss']
 })
-export class MainContentComponent {
+export class MainContentComponent implements OnInit, OnChanges {
 
-  // Removed unused input property "content"
   @Input() fileToLoad: string = '';
   @Input() divId: string = '';
 
@@ -31,7 +30,17 @@ export class MainContentComponent {
     private renderer: Renderer2
   ) {}
 
+  ngOnInit(): void {
+    console.log("ngOnInit for MainContentComponent");
+    // If fileToLoad is already defined when the component is created,
+    // ensure content is loaded.
+    if (this.fileToLoad) {
+      this.loadContent(this.fileToLoad);
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("ngOnChanges for MainContentComponent", changes);
     if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
       this.loadContent(changes['fileToLoad'].currentValue);
     }
@@ -83,7 +92,6 @@ export class MainContentComponent {
     if (!this.contentContainer) return;
   
     const modalTrigger = this.contentContainer.nativeElement.querySelector('trigger-modal');
-    
     if (modalTrigger) {
       const jsonData = modalTrigger.getAttribute('data-content');
       if (jsonData) {
@@ -103,11 +111,9 @@ export class MainContentComponent {
     if (!this.contentContainer) return;
   
     const elements = this.contentContainer.nativeElement.querySelectorAll('[data-click]');
-  
     elements.forEach((element: HTMLElement) => {
       const functionName = element.getAttribute('data-click');
       const jsonData = element.getAttribute('data-content');
-  
       if (functionName === 'openModalWindow' && jsonData) {
         try {
           const modalData = JSON.parse(jsonData);

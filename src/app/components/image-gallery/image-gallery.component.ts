@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { JsonDataService } from '../../services/json-data.service';
 
 @Component({
@@ -6,44 +6,38 @@ import { JsonDataService } from '../../services/json-data.service';
   standalone: true,
   imports: [],
   templateUrl: './image-gallery.component.html',
-  styleUrl: './image-gallery.component.scss' 
+  styleUrls: ['./image-gallery.component.scss']
 })
-
-export class ImageGalleryComponent {
+export class ImageGalleryComponent implements OnInit, OnChanges {
 
   images: any[] = [];
 
-  constructor(private jsonDataService: JsonDataService) {} 
+  @Input() fileToLoad: string = '';
+  @Input() divId: string = '';
 
-  @Input() fileToLoad: String = '';
+  constructor(private jsonDataService: JsonDataService) {}
 
-  @Input() divId: String = '';
-
-  ngOnChanges(changes: SimpleChanges): void { 
-
-    if (changes['fileToLoad']) {
-
-      if(changes['fileToLoad'].currentValue != "")
-      {
-        this.loadImages(changes['fileToLoad'].currentValue);
-      } 
-
+  ngOnInit(): void {
+    console.log("ImageGalleryComponent OnInit");
+    if (this.fileToLoad) {
+      this.loadImages(this.fileToLoad);
     }
-
   }
 
-  loadImages(contentToLoad: String)
-  {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ImageGalleryComponent ngOnChanges", changes);
+    if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
+      this.loadImages(changes['fileToLoad'].currentValue);
+    }
+  }
 
+  loadImages(contentToLoad: string): void {
     this.jsonDataService.loadData('assets/' + contentToLoad).subscribe(() => {
       this.images = this.jsonDataService.getData();
     });
-
   }
 
   get getImages() {
     return this.images;
   }
-
-
 }

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,51 +6,44 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [],
   templateUrl: './news.component.html',
-  styleUrl: './news.component.scss'
+  styleUrls: ['./news.component.scss']
 })
-export class NewsComponent {
-  
+export class NewsComponent implements OnInit, OnChanges {
+
   news: any[] = [];
+
+  @Input() fileToLoad: string = '';
+  @Input() divId: string = '';
 
   constructor(private http: HttpClient) {}
 
-  @Input() fileToLoad: String = '';
-
-  @Input() divId: String = '';
-
-  ngOnChanges(changes: SimpleChanges): void { 
-
-    if (changes['fileToLoad']) {
-
-      if(changes['fileToLoad'].currentValue != "")
-      {
-        this.loadnews(changes['fileToLoad'].currentValue);
-      } 
-
+  ngOnInit(): void {
+    console.log('NewsComponent OnInit');
+    if (this.fileToLoad) {
+      this.loadNews(this.fileToLoad);
     }
-
   }
 
-  loadnews(contentToLoad: String)
-  {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('NewsComponent ngOnChanges', changes);
+    if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
+      this.loadNews(changes['fileToLoad'].currentValue);
+    }
+  }
 
+  loadNews(contentToLoad: string): void {
     console.log("contentToLoad: " + contentToLoad);
-    
     this.http.get<any[]>('assets/' + contentToLoad).subscribe(
       (response) => {
-        // Success callback: Assign the fetched JSON data to the `menuItems` property
         this.news = response;
       },
       (error) => {
-        // Error callback: Log an error message if the JSON file cannot be loaded
         console.error('Error fetching JSON file:', error);
       }
     );
-
   }
 
   get getNews() {
     return this.news;
   }
-
 }

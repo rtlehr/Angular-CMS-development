@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { JsonDataService } from '../../../services/json-data.service';
 
 @Component({
@@ -7,48 +7,37 @@ import { JsonDataService } from '../../../services/json-data.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './business-card.component.html',
-  styleUrl: './business-card.component.scss'
+  styleUrls: ['./business-card.component.scss']
 })
-export class BusinessCardComponent { 
+export class BusinessCardComponent implements OnInit, OnChanges { 
 
-  constructor(private jsonDataService: JsonDataService) {}
-
-  @Input() fileToLoad: String = '';
-
-  @Input() divId: String = '';
+  @Input() fileToLoad: string = '';
+  @Input() divId: string = '';
 
   people: any[] = [];
 
-  ngOnChanges(changes: SimpleChanges): void { 
+  constructor(private jsonDataService: JsonDataService) {}
 
-    if (changes['fileToLoad']) {
-
-      if(changes['fileToLoad'].currentValue != "")
-      {
-        this.loadPeople(changes['fileToLoad'].currentValue);
-      } 
-
+  ngOnInit(): void {
+    if (this.fileToLoad) {
+      this.loadPeople(this.fileToLoad);
     }
-
   }
 
-  loadPeople(contentToLoad: String)
-  {
+  ngOnChanges(changes: SimpleChanges): void { 
+    if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
+      this.loadPeople(changes['fileToLoad'].currentValue);
+    }
+  }
 
-      this.jsonDataService.loadData('assets/' + contentToLoad).subscribe(() => {
-      
+  loadPeople(contentToLoad: string): void {
+    this.jsonDataService.loadData('assets/' + contentToLoad).subscribe(() => {
       const data = this.jsonDataService.getData();
-
       this.people = data.people;
-
     });
-
   }
 
   get getPeople() {
-
     return this.people;
-
   }
-
 }
