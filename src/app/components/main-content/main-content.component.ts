@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Input, SimpleChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ModalWindowService } from '../../services/modal-window.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { take } from 'rxjs/operators';
 
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
@@ -11,11 +12,11 @@ import 'highlight.js/styles/atom-one-dark.css';
   standalone: true,
   imports: [HttpClientModule],
   templateUrl: './main-content.component.html',
-  styleUrl: './main-content.component.scss'
+  styleUrls: ['./main-content.component.scss']
 })
 export class MainContentComponent {
 
-  @Input() content: string = '';
+  // Removed unused input property "content"
   @Input() fileToLoad: string = '';
   @Input() divId: string = '';
 
@@ -37,23 +38,47 @@ export class MainContentComponent {
   }
 
   loadContent(fileName: string) {
-    this.http.get(`assets/${fileName}`, { responseType: 'text' }).subscribe({
-      next: (html) => {
-        this.htmlContent = this.sanitizer.bypassSecurityTrustHtml(html);
-  
-        setTimeout(() => {
-          this.attachClickEvents();
-          this.highlightCode();
-          this.checkForModalTrigger();
-        }, 10);
-      },
-      error: (err) => {
-        console.error('Failed to load content:', err);
-        this.htmlContent = '<p>Sorry, the content could not be loaded.</p>';
-      }
-    });
+    this.http.get(`assets/${fileName}`, { responseType: 'text' })
+      .pipe(take(1))
+      .subscribe({
+        next: (html) => {
+          this.htmlContent = this.sanitizer.bypassSecurityTrustHtml(html);
+          this.observeContentChanges();
+        },
+        error: (err) => {
+          console.error('Failed to load content:', err);
+          this.htmlContent = '<p>Sorry, the content could not be loaded.</p>';
+        }
+      });
   }
   
+  /**
+   * Uses a MutationObserver to wait until the content has rendered
+   * before attaching events, highlighting code, and checking for modal triggers.
+   */
+  observeContentChanges() {
+    if (this.contentContainer) {
+      const observer = new MutationObserver(() => {
+        observer.disconnect();
+        this.attachClickEvents();
+        this.highlightCode();
+        this.checkForModalTrigger();
+      });
+  
+      observer.observe(this.contentContainer.nativeElement, {
+        childList: true,
+        subtree: true
+      });
+    } else {
+      // Fallback in the unlikely event that contentContainer isn't available
+      setTimeout(() => {
+        this.attachClickEvents();
+        this.highlightCode();
+        this.checkForModalTrigger();
+      }, 10);
+    }
+  }
+
   checkForModalTrigger() {
     if (!this.contentContainer) return;
   
@@ -61,23 +86,19 @@ export class MainContentComponent {
     
     if (modalTrigger) {
       const jsonData = modalTrigger.getAttribute('data-content');
-      
       if (jsonData) {
         try {
-          const modalData = JSON.parse(jsonData); // Convert JSON string to object
+          const modalData = JSON.parse(jsonData);
           this.openModalWindow(modalData);
         } catch (error) {
           console.error("Invalid JSON in trigger-modal:", error);
         }
       }
-  
       // Remove the trigger-modal tag to avoid duplicate triggers
       modalTrigger.remove();
     }
   }
   
-  
-
   attachClickEvents() {
     if (!this.contentContainer) return;
   
@@ -89,13 +110,11 @@ export class MainContentComponent {
   
       if (functionName === 'openModalWindow' && jsonData) {
         try {
-          const modalData = JSON.parse(jsonData); // Convert JSON string to object
-  
+          const modalData = JSON.parse(jsonData);
           this.renderer.listen(element, 'click', (event) => {
-            event.preventDefault(); // Prevent default link behavior
+            event.preventDefault();
             this.openModalWindow(modalData);
           });
-  
         } catch (error) {
           console.error("Invalid JSON in data-content:", error);
         }
@@ -103,7 +122,6 @@ export class MainContentComponent {
     });
   }
   
-
   highlightCode() {
     if (this.contentContainer) {
       this.contentContainer.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
@@ -113,8 +131,7 @@ export class MainContentComponent {
   }
 
   openModalWindow(modalContent: any) {
-    console.log("Modal Content:", modalContent); // Should log: { content: "this is modal content from blog list" }
+    console.log("Modal Content:", modalContent);
     this.modalWindow.openModalWindow(modalContent);
   }
-  
 }
