@@ -10,6 +10,8 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { HasPermissionDirective } from './directives/permission.directive';
 import { PermissionService } from './services/permission.service';
 
+import { InfoCardsComponent } from './components/cards/info-cards/info-cards.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,6 +22,7 @@ import { PermissionService } from './services/permission.service';
     RouterOutlet,
     ModalWindowComponent,
     HasPermissionDirective,
+    InfoCardsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -81,7 +84,7 @@ export class AppComponent {
         this.header.style.transform = "translateY(0)";
       }
 
-      // If Navbar Reaches the Top, Stick It
+      // If Navbar Reaches the Top, Stick It 
       if (scrollTop >= this.header.clientHeight) {
         this.navbar.classList.add("navbar-sticky");
         this.navbarPlaceholder.style.display = "block"; // Prevents jump
