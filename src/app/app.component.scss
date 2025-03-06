@@ -1,14 +1,11 @@
-// Colors
-$primary-color: #007bff;
-$dark-color: #212529;
-$light-color: #f8f9fa;
+@import "../color-scheme.scss";
 
-// Global Styles
-body {
-  font-family: 'Roboto', sans-serif;
-  background-color: $light-color;
-  color: $dark-color;
+
+.nav-background
+{
+  background-color: $mono-light;
 }
+// Global Styles
 
 // Header (Scrolls Out)
 #pageHeader {
