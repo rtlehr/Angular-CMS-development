@@ -1,21 +1,16 @@
-<div [id] = "divId" class="list-group">
-
+<div [id]="divId" class="news-list">
   @for(news of getNews; track news.id) 
   {
-
-    <div class="list-group-item newsItem">
-      <div class="d-flex align-items-start">
-        <!-- News Image -->
-        <img [src]="news.image" alt="News Image" class="me-3" style="width: 100px; height: auto; object-fit: cover;">
-        <div>
-          <h5 class="mb-1">{{ news.title }}</h5>
-          <p class="text-muted mb-1">{{ news.date }}</p>
-          <p class="mb-2">{{ news.content }}</p>
-          <a href="#" class="btn btn-primary btn-sm">Read More</a> 
-        </div>
+    <div class="news-item">
+      <div class="news-thumbnail">
+        <img [src]="news.image" alt="News Image">
+      </div>
+      <div class="news-content">
+        <h5>{{ news.title }}</h5>
+        <p class="news-date">{{ news.date }}</p>
+        <p class="news-excerpt">{{ news.content }}</p>
+        <a href="#" class="btn btn-primary btn-sm">Read More</a>
       </div>
     </div>
-
   }
-  </div>
-  
+</div>

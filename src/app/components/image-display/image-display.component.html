@@ -1,7 +1,6 @@
-<div [id] = "divId" class="gallery">
+<div [id]="divId" class="gallery">
   @for(images of getImages; track images.id) 
   {
-
     @if(images.private == "false")
     {
       <div class="thumbnail" (click)="openModal(images)">
@@ -10,10 +9,11 @@
     }
     @else
     {
-      <img src="./assets/images/privateImage.jpg" alt="THis is a private image" />
+      <div class="thumbnail private">
+        <img src="./assets/images/privateImage.jpg" alt="This is a private image" />
+      </div>
     }
-}
-
+  }
 </div>
 
 <!-- Modal -->
@@ -21,7 +21,9 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="closeModal()">&times;</span>
     <img [src]="selectedImage.largeSrc" [alt]="selectedImage.title" class="modal-image" />
-    <h3>{{ selectedImage.title }}</h3>
-    <p>{{ selectedImage.description }}</p>
+    <div class="modal-info">
+      <h3>{{ selectedImage.title }}</h3>
+      <p>{{ selectedImage.description }}</p>
+    </div>
   </div>
 </div>
