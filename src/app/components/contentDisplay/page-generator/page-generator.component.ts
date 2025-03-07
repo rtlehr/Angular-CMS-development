@@ -11,6 +11,7 @@ import { ContentTabsComponent } from '../../content-tabs/content-tabs.component'
 import { BlogListComponent } from '../../blog/blog-list/blog-list.component'; 
 import { InfoHighlightComponent } from '../../cards/info-highlight/info-highlight.component';
 import { BusinessCardComponent } from '../../cards/business-card/business-card.component';
+import { InfoCardsComponent } from '../../info-cards/info-cards.component';
 import { pageContent } from '../../../models/page-content.model';
 import { PermissionService } from '../../../services/permission.service';
 
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     BlogListComponent,
     InfoHighlightComponent,
     BusinessCardComponent,
+    InfoCardsComponent,
     CommonModule,
     DynamicWrapperComponent  // Include the wrapper in your component’s imports
   ],
@@ -61,7 +63,8 @@ export class PageGeneratorComponent implements OnInit {
     tabs: ContentTabsComponent,
     blog: BlogListComponent,
     infoHighlight: InfoHighlightComponent,
-    businesscard: BusinessCardComponent
+    businesscard: BusinessCardComponent,
+    InfoCards: InfoCardsComponent
   };
 
   constructor(

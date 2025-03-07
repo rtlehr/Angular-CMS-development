@@ -10,7 +10,7 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { HasPermissionDirective } from './directives/permission.directive';
 import { PermissionService } from './services/permission.service';
 
-import { InfoCardsComponent } from './components/cards/info-cards/info-cards.component';
+import { InfoCardsComponent } from './components/info-cards/info-cards.component';
 
 @Component({
   selector: 'app-root',

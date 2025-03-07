@@ -120,6 +120,15 @@ export const routes: Routes = [
             }
           },
           { 
+            path: 'info-card-sample',
+            component: PageGeneratorComponent,
+            title: 'Info Cards',
+            data: {
+              menu: true, 
+              pageContent: [{"contentType": "InfoCards", "divId": "infoCards", "contentFile": "content/pages/cms-information/component-samples/info-cards/info-cards.json"}]
+            }
+          },
+          { 
             path: 'form-sample',
             component: PageGeneratorComponent,
             title: 'Forms',
