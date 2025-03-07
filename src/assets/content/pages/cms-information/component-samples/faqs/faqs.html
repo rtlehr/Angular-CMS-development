@@ -1,123 +1,72 @@
-
-<h1 class="mb-3">FaqComponent Usage Guide</h1>
+<h2>FaqComponent Instructions</h2>
 
 <p>
-    The <code>FaqComponent</code> is an Angular component designed to display a list of frequently asked questions (FAQs). It fetches the questions and answers from a JSON file and provides smooth scrolling to both questions and answers.
+  The FaqComponent is designed to display a list of frequently asked questions along with their answers. It renders the questions in a clickable list and, when a question is selected, smoothly scrolls to the corresponding answer. Each answer section also includes a "Back to Top" link for easy navigation.
 </p>
 
-<h2 class="mt-4">1. Installation & Import</h2>
-<p>Ensure that you import the component into your Angular module or use it as a standalone component.</p>
-
-<pre><code class="language-typescript">
-import { FaqComponent } from 'path-to-component/faq.component';
-</code></pre>
-
-<h2 class="mt-4">2. Component Selector</h2>
-<p>Use the following selector to include the component in your Angular template:</p>
-
-<pre><code class="language-html">
-&lt;app-faq [fileToLoad]="'faq-data.json'" [divId]="'faq-list'"&gt;&lt;/app-faq&gt;
-</code></pre>
-
-<h2 class="mt-4">3. Input Properties</h2>
-<table class="table table-bordered">
-    <thead class="table-light">
-        <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>fileToLoad</code></td>
-            <td><code>string</code></td>
-            <td>The path to the JSON file containing the FAQ data.</td>
-        </tr>
-        <tr>
-            <td><code>divId</code></td>
-            <td><code>string</code></td>
-            <td>Sets the ID of the container div for the FAQ list.</td>
-        </tr>
-    </tbody>
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON file containing FAQ data (e.g., 'faq-data.json'). The file is loaded from the assets folder.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier for the main container of the FAQ component, which can be used for styling or DOM manipulation.
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<h2 class="mt-4">4. Features</h2>
-<ul>
-    <li><strong>Smooth Scrolling:</strong> Click on a question to scroll smoothly to its corresponding answer.</li>
-    <li><strong>Back to Top:</strong> After reading an answer, you can click "Back to Top" to return to the list of questions.</li>
-    <li><strong>Dynamic FAQ Loading:</strong> The component loads FAQ data from a JSON file.</li>
-    <li><strong>Responsive Design:</strong> The component adjusts its layout according to screen size.</li>
-</ul>
-
-<h2 class="mt-4">5. Example Usage</h2>
-<p>To load a JSON file containing FAQ data and display the list, use the following example:</p>
-
-<pre><code class="language-html">
-&lt;app-faq [fileToLoad]="'faq-data.json'" [divId]="'faq-list'"&gt;&lt;/app-faq&gt;
-</code></pre>
-
-<h2 class="mt-4">6. JSON Structure</h2>
-<p>The FAQ data should follow this structure:</p>
-
-<pre><code class="language-json">
+<h3>JSON Data Structure</h3>
+<p>
+  The component expects the JSON file to be an array of FAQ objects with the following structure:
+</p>
+<pre><code class="json">
 [
-{
-    "id": "1",
-    "question": "What is your return policy?",
-    "answer": "You can return any item within 30 days of purchase with a receipt."
-},
-{
-    "id": "2",
-    "question": "How can I track my order?",
-    "answer": "You can track your order by logging into your account and visiting the 'Orders' section."
-},
-{
-    "id": "3",
-    "question": "Do you offer gift cards?",
-    "answer": "Yes, we offer digital and physical gift cards available for purchase online."
-},
-{
-    "id": "4",
-    "question": "What payment methods do you accept?",
-    "answer": "We accept major credit cards, PayPal, and Apple Pay."
-},
-{
-    "id": "5",
-    "question": "Can I cancel or modify my order?",
-    "answer": "Yes, you can cancel or modify your order within 24 hours of placing it by contacting customer support."
-}
+    {
+        "id": "1",
+        "question": "What is your return policy?",
+        "answer": "You can return any item within 30 days of purchase with a receipt."
+    },
+    {
+        "id": "2",
+        "question": "How can I track my order?",
+        "answer": "You can track your order by logging into your account and visiting the 'Orders' section."
+    },
+    {
+        "id": "3",
+        "question": "Do you offer gift cards?",
+        "answer": "Yes, we offer digital and physical gift cards available for purchase online."
+    },
+    {
+        "id": "4",
+        "question": "What payment methods do you accept?",
+        "answer": "We accept major credit cards, PayPal, and Apple Pay."
+    },
+    {
+        "id": "5",
+        "question": "Can I cancel or modify my order?",
+        "answer": "Yes, you can cancel or modify your order within 24 hours of placing it by contacting customer support."
+    }
 ]
 </code></pre>
-
-<h2 class="mt-4">7. FAQ Layout</h2>
-<p>Each FAQ item consists of a clickable question that scrolls to its answer:</p>
-
-<pre><code class="language-html">
-&lt;div class="faq-container"&gt;
-&lt;div id="faq-questions" class="faq-questions"&gt;
-    &lt;h2&gt;Frequently Asked Questions&lt;/h2&gt;
-    &lt;ul class="list-group"&gt;
-        &lt;li class="list-group-item"&gt;
-            &lt;a href="javascript:void(0)" (click)="scrollToAnswer(faqs.id)"&gt;
-                {{ faqs.question }}
-            &lt;/a&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class="faq-answers mt-4"&gt;
-    &lt;div [id]="'answer-' + faqs.id" class="faq-answer"&gt;
-        &lt;h3&gt;{{ faqs.question }}&lt;/h3&gt;
-        &lt;p&gt;{{ faqs.answer }}&lt;/p&gt;
-        &lt;a href="javascript:void(0)" (click)="scrollToTop()"&gt;Back to Top&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-<h2 class="mt-4">8. Error Handling</h2>
-<p>If the JSON file cannot be loaded, the component will not display any FAQ data, and you may observe an empty FAQ list.</p>
-
-<h2 class="mt-4">Conclusion</h2>
-<p>The <code>FaqComponent</code> is a flexible way to display FAQ data from a JSON file, with smooth scrolling functionality to enhance the user experience.</p>
+<p>
+  Each FAQ object includes:
+  <code>id</code> – a unique identifier,
+  <code>question</code> – the FAQ question,
+  <code>answer</code> – the corresponding answer.
+</p>

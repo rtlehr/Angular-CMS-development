@@ -1,16 +1,8 @@
-<h2>Image Display Component Instructions</h2>
+<h2>ImageDisplayComponent Instructions</h2>
 
-<p>The <code>ImageDisplayComponent</code> is used to display a gallery of images, with the option to view a larger version in a modal window when clicked. It handles both public and private images, with placeholders for private ones.</p>
-
-<h3>Usage</h3>
-
-<p>To use the <code>ImageDisplayComponent</code> in your Angular project:</p>
-
-<ol>
-  <li>Import and configure the <code>ImageDisplayComponent</code> in your Angular module.</li>
-  <li>Provide the component with the path to the JSON data file containing image information.</li>
-  <li>Use the component in your HTML by passing the <code>divId</code> and the <code>fileToLoad</code> inputs as required.</li>
-</ol>
+<p>
+  The ImageDisplayComponent is designed to display a gallery of images loaded from a JSON data file. It renders clickable thumbnails for public images and a placeholder for private images. When a public image is clicked, the component opens a modal window displaying a larger version of the image along with its title and description.
+</p>
 
 <h3>Component Inputs</h3>
 <table class="table table-striped">
@@ -25,18 +17,24 @@
     <tr>
       <td><code>fileToLoad</code></td>
       <td>String</td>
-      <td>Path to the JSON file containing image data (e.g., 'assets/images-data.json').</td>
+      <td>
+        The path to the JSON file containing image data (e.g., 'images-data.json'). The file is loaded from the assets folder.
+      </td>
     </tr>
     <tr>
       <td><code>divId</code></td>
       <td>String</td>
-      <td>Unique ID for the div element containing the gallery of images.</td>
+      <td>
+        An identifier assigned to the main gallery container for targeting or styling purposes.
+      </td>
     </tr>
   </tbody>
 </table>
 
 <h3>JSON Data Structure</h3>
-<p>The component expects the following structure for the JSON data file:</p>
+<p>
+  The component expects the JSON file to be an array of image objects with the following structure:
+</p>
 <pre><code class="json">
 [
     {
@@ -51,28 +49,20 @@
         "id": "2",
         "src": "./assets/images/airplane.jpeg",
         "largeSrc": "./assets/images/airplane.jpeg",
-        "title": "Image 2",
-        "description": "This is the description for Image 2.",
+        "title": "Image 1",
+        "description": "This is the description for Image 1.",
         "private": "true"
     },
     {
         "id": "3",
         "src": "./assets/images/motorcycle.png",
         "largeSrc": "./assets/images/motorcycle.png",
-        "title": "Image 3",
-        "description": "This is the description for Image 3.",
+        "title": "Image 1",
+        "description": "This is the description for Image 1.",
         "private": "false"
     }
 ]
 </code></pre>
-
-<h3>Features</h3>
-<ul>
-  <li>Displays images in a grid layout.</li>
-  <li>Private images are replaced with a placeholder image.</li>
-  <li>Clicking an image opens a modal with a larger view and description.</li>
-  <li>Clicking the close button or anywhere outside the modal closes it.</li>
-</ul>
-
-<h3>Conclusion</h3>
-<p>This <code>ImageDisplayComponent</code> provides an easy way to create an interactive image gallery with modal previews, while also supporting both public and private images.</p>
+<p>
+  In this structure, the <code>src</code> property holds the path for the thumbnail image, while the <code>largeSrc</code> is used in the modal view. The <code>private</code> property determines whether the actual image or a placeholder image should be displayed.
+</p>

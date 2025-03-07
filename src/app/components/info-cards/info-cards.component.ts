@@ -21,9 +21,6 @@ export class InfoCardsComponent {
 
   constructor(private jsonDataService: JsonDataService) {}
 
-  //@Input() fileToLoad: string = '';
-  //@Input() divId: string = '';
-
   infoItems: InfoItem[] = [];
 
   fileToLoad = "content/pages/cms-information/component-samples/info-cards/info-cards.json";

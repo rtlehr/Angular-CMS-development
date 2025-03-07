@@ -1,5 +1,85 @@
+<h2>InfoHighlightComponent Instructions</h2>
+
 <p>
-  The <strong>Info-Highlite</strong> Component is an Angular standalone component designed to display an image slider with accompanying text boxes that allow users to navigate through different images and highlights. The component automatically cycles through images at a set interval but also allows manual selection, resetting the auto-scroll on interaction. It dynamically loads image data from a JSON file, ensuring flexibility in content updates without modifying the code. This component is particularly useful for showcasing key highlights, promotional banners, or featured content in a visually engaging way while maintaining responsiveness across different screen sizes.
+  The InfoHighlightComponent is an interactive image slider designed to highlight key information through clickable text boxes. It loads configuration data from a JSON file, which defines the overall component size, auto-scroll behavior, and an array of images. Each image object includes an image URL, a title, and an optional text overlay. Users can manually change the displayed image by clicking on the corresponding text box, and if enabled, the slider will auto-scroll through the images.
 </p>
 
-  
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON configuration file that provides the slider settings and image data (e.g., 'info-highlight-data.json'). The file is loaded from the assets folder.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier for the main container of the slider, useful for custom styling or DOM targeting.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>JSON Data Structure</h3>
+<p>
+  The component expects the JSON file to have the following structure:
+</p>
+<pre><code class="json">
+{
+  "componentSize": 500,
+  "autoScroll": true,
+  "images": [
+      {
+        "imageUrl": "./assets/images/motorcycle.png",
+        "title": "This is Box 1",
+        "textBoxes": []
+      },
+      {
+        "imageUrl": "./assets/images/snowtruck.jpg",
+        "title": "This is Box 2",
+        "textBoxes": [
+          {
+            "text": "fringilla mi vel, fermentum massa. Integer mollis nunc erat, nec aliquet quam mattis vestibulum."
+          }
+        ]
+      },
+      {
+        "imageUrl": "./assets/images/motorcycle.png",
+        "title": "This is Box 3",
+        "textBoxes": [
+          {
+            "text": "Aenean ex libero, ullamcorper non neque in, vulputate dignissim nisi. Nam tincidunt sagittis lacus, sit amet semper odio aliquet eu."
+          }
+        ]
+      },
+      {
+        "imageUrl": "./assets/images/snowtruck.jpg",
+        "title": "This is Box 4",
+        "textBoxes": [
+          {
+            "text": "bibendum urna. Suspendisse tristique metus quis viverra commodo."
+          }
+        ]
+      },
+      {
+        "imageUrl": "./assets/images/motorcycle.png",
+        "title": "This is Box 5",
+        "textBoxes": []
+      }
+  ]
+}
+</code></pre>
+<p>
+  In this structure, <code>componentSize</code> determines the dimensions of the slider, <code>autoScroll</code> enables or disables automatic image transitions, and <code>images</code> is an array where each object specifies the image URL, a title to display on the text box, and an optional <code>textBoxes</code> array for overlay text.
+</p>

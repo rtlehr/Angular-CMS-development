@@ -1,5 +1,89 @@
+<h2>BusinessCardComponent Instructions</h2>
+
 <p>
-  The <strong>Business Cards</strong> is a self-contained Angular component designed to display professional contact details in a sleek, responsive layout. It features a large circular profile picture positioned in the top-left corner, with the name, contact details, and social media links neatly arranged beside it. A bio section is centered at the bottom, ensuring a balanced design. Built with Bootstrap and SASS, it supports three cards per row on larger screens while stacking on smaller devices. Ideal for company websites, freelancer portfolios, networking events, and customer support teams, this component offers a visually appealing and reusable way to showcase professionals.
+  The BusinessCardComponent displays professional business cards for individuals by fetching their details from a JSON file. Each card includes a profile photo, name, contact information (business phone, cell, email), social media links, and a brief biography.
 </p>
 
-  
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON file containing business card data (e.g., 'business-card-data.json'). The file is loaded from the assets folder.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier for the main container of the business cards, used for styling or DOM targeting.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>JSON Data Structure</h3>
+<p>
+  The component expects the JSON file to have the following structure:
+</p>
+<pre><code class="json">
+{
+  "people": [
+      {
+        "name": "John Doe",
+        "photo": "./assets/images/motorcycle.png",
+        "businessPhone": "123-456-7890",
+        "cellPhone": "987-654-3210",
+        "email": "john.doe@example.com",
+        "socialMedia": [
+          { "icon": "bi-facebook", "url": "https://facebook.com/johndoe" },
+          { "icon": "bi-twitter", "url": "https://twitter.com/johndoe" }
+        ],
+        "bio": "John is a software developer with 10 years of experience."
+      },
+      {
+        "name": "Jane Smith",
+        "photo": "./assets/images/motorcycle.png",
+        "businessPhone": "234-567-8901",
+        "cellPhone": "876-543-2109",
+        "email": "jane.smith@example.com",
+        "socialMedia": [
+          { "icon": "bi-linkedin", "url": "https://linkedin.com/in/janesmith" },
+          { "icon": "bi-instagram", "url": "https://instagram.com/janesmith" }
+        ],
+        "bio": "Jane is a graphic designer passionate about branding and UI/UX." 
+      },
+      {
+        "name": "Michael Brown",
+        "photo": "./assets/images/motorcycle.png",
+        "businessPhone": "345-678-9012",
+        "cellPhone": "765-432-1098",
+        "email": "michael.brown@example.com",
+        "socialMedia": [
+          { "icon": "bi-github", "url": "https://github.com/michaelbrown" },
+          { "icon": "bi-twitter", "url": "https://twitter.com/michaelbrown" }
+        ],
+        "bio": "Michael is a data scientist specializing in AI and machine learning."
+      }
+  ]
+}
+</code></pre>
+<p>
+  In this JSON structure, each person object includes:
+  <code>name</code> – the individual's full name,
+  <code>photo</code> – the path to the profile image,
+  <code>businessPhone</code> – the business contact number,
+  <code>cellPhone</code> – the mobile phone number,
+  <code>email</code> – the email address,
+  <code>socialMedia</code> – an array of social media objects (each with <code>icon</code> and <code>url</code>),
+  <code>bio</code> – a brief biography.
+</p>

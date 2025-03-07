@@ -1,80 +1,48 @@
-<h1 class="mb-3">MainContentComponent Usage Guide</h1>
+<h2>MainContentComponent Instructions</h2>
 
 <p>
-    The <code>MainContentComponent</code> is an Angular component designed to dynamically load and display HTML content from an external file. It also supports code highlighting and modal window triggers.
+  The MainContentComponent is designed to load an external HTML file from the assets folder and render its content directly into the browser window. It uses Angular's HttpClient to fetch the HTML file and sanitizes the content for safe rendering. After the content is loaded, the component observes the rendered DOM to attach click events, highlight code blocks, and detect modal triggers for enhanced interactivity.
 </p>
 
-<h2 class="mt-4">1. Installation & Import</h2>
-<p>Ensure that you import the component into your Angular module or use it as a standalone component.</p>
-
-<pre><code class="language-typescript">
-import { MainContentComponent } from 'path-to-component/main-content.component';
-</code></pre>
-
-<h2 class="mt-4">2. Component Selector</h2>
-<p>Use the following selector to include the component in your Angular template:</p>
-
-<pre><code class="language-html">
-&lt;app-main-content [fileToLoad]="'example.html'" [divId]="'content-area'"&gt;&lt;/app-main-content&gt;
-</code></pre>
-
-<h2 class="mt-4">3. Input Properties</h2>
-<table class="table table-bordered">
-    <thead class="table-light">
-        <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>fileToLoad</code></td>
-            <td><code>string</code></td>
-            <td>The path to the HTML file to load dynamically.</td>
-        </tr>
-        <tr>
-            <td><code>divId</code></td>
-            <td><code>string</code></td>
-            <td>Sets the ID of the container div where content will be injected.</td>
-        </tr>
-    </tbody>
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the HTML file to load (e.g., 'content/main-content.html'). This file should be placed in the assets folder.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier for the main container that will display the loaded HTML content. Useful for styling or DOM manipulation.
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<h2 class="mt-4">4. Features</h2>
-<ul>
-    <li><strong>Dynamic HTML Loading:</strong> Loads external HTML files into the component.</li>
-    <li><strong>Code Highlighting:</strong> Uses <code>highlight.js</code> to apply syntax highlighting.</li>
-    <li><strong>Modal Triggers:</strong> Detects specific HTML elements to open a modal window dynamically.</li>
-</ul>
-
-<h2 class="mt-4">5. Example Usage</h2>
-<p>To load an HTML file and enable modal triggering, include the component as shown below:</p>
-
-<pre><code class="language-html">
-&lt;app-main-content [fileToLoad]="'content.html'" [divId]="'content-container'"&gt;&lt;/app-main-content&gt;
+<h3>HTML File Structure</h3>
+<p>
+  Unlike components that load JSON data, the MainContentComponent expects an HTML file. The HTML file should contain valid markup and can include elements such as headings, paragraphs, code blocks, or custom modal triggers. For example:
+</p>
+<pre><code class="html">
+&lt;h1&gt;Welcome to Our Site&lt;/h1&gt;
+&lt;p&gt;This content is loaded from an external HTML file.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-typescript"&gt;
+  // Your code snippet here
+&lt;/code&gt;&lt;/pre&gt;
+&lt;trigger-modal data-content='{"title": "Modal Title", "body": "Modal Body Content"}'&gt;&lt;/trigger-modal&gt;
 </code></pre>
-
-<h2 class="mt-4">6. Modal Triggering</h2>
-<p>If an element in the loaded HTML has the following structure, the component will open a modal:</p>
-
-<pre><code class="language-html">
-&lt;trigger-modal data-content='{"title": "Modal Title", "body": "This is modal content"}'&gt;&lt;/trigger-modal&gt;
-</code></pre>
-
-<h2 class="mt-4">7. Event Handling</h2>
-<p>You can use the <code>data-click</code> attribute to trigger actions like opening modals dynamically:</p>
-
-<pre><code class="language-html">
-&lt;a href="#" data-click="openModalWindow" data-content='{"title": "Dynamic Modal", "body": "Loaded from HTML"}'&gt;Open Modal&lt;/a&gt;
-</code></pre>
-
-<h2 class="mt-4">8. Error Handling</h2>
-<p>If the specified HTML file fails to load, the component will display the following fallback message:</p>
-
-<pre><code class="language-html">
-&lt;p&gt;Sorry, the content could not be loaded.&lt;/p&gt;
-</code></pre>
-
-<h2 class="mt-4">Conclusion</h2>
-<p>The <code>MainContentComponent</code> provides a flexible way to load and display dynamic HTML content with added functionality like modal triggers and code highlighting.</p>
+<p>
+  The component processes the loaded HTML to attach dynamic behaviors such as code highlighting and modal triggers.
+</p>

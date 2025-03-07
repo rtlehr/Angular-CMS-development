@@ -1,0 +1,91 @@
+<h2>InfoCardsComponent Instructions</h2>
+
+<p>
+  The InfoCardsComponent displays a set of information cards arranged in a grid layout. Each card features an icon, a title, and a description, and is wrapped in an anchor tag that can link to additional information. The component dynamically loads the card data from a JSON file using a JSON data service.
+</p>
+
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON file containing the information card data (e.g., 'content/pages/cms-information/component-samples/info-cards/info-cards.json').
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        The identifier for the main container of the info cards, used for styling or DOM targeting.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>JSON Data Structure</h3>
+<p>
+  The JSON file should be an array of objects, each representing an info card. Each object should have the following properties:
+</p>
+<pre><code class="json">
+[
+    {
+        "id": 1,
+        "icon": "bi-lightbulb",
+        "title": "Innovative Ideas",
+        "description": "Discover fresh perspectives.",
+        "link": "/ideas"
+    },
+    {
+        "id": 2,
+        "icon": "bi-bar-chart",
+        "title": "Growth Analytics",
+        "description": "Track progress with insights.",
+        "link": "/analytics"
+    },
+    {
+        "id": 3,
+        "icon": "bi-people",
+        "title": "Team Collaboration",
+        "description": "Work together seamlessly.",
+        "link": "/collaboration"
+    },
+    {
+        "id": 4,
+        "icon": "bi-shield-lock",
+        "title": "Enhanced Security",
+        "description": "State-of-the-art security.",
+        "link": "/security"
+    },
+    {
+        "id": 5,
+        "icon": "bi-lightning",
+        "title": "Lightning Fast",
+        "description": "Unparalleled speed.",
+        "link": "/performance"
+    },
+    {
+        "id": 6,
+        "icon": "bi-headset",
+        "title": "24/7 Support",
+        "description": "Get help anytime.",
+        "link": "/support"
+    }
+]
+</code></pre>
+<p>
+  Each info card object includes:
+  <code>id</code> – a unique identifier,
+  <code>icon</code> – the icon class for display,
+  <code>title</code> – the heading for the card,
+  <code>description</code> – a brief explanation,
+  <code>link</code> – a URL for additional information.
+</p>

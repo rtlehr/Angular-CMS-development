@@ -125,7 +125,8 @@ export const routes: Routes = [
             title: 'Info Cards',
             data: {
               menu: true, 
-              pageContent: [{"contentType": "InfoCards", "divId": "infoCards", "contentFile": "content/pages/cms-information/component-samples/info-cards/info-cards.json"}]
+              pageContent: [{"contentType": "contentPage", "divId": "infoCardsContent", "contentFile": "content/pages/cms-information/component-samples/info-cards/info-cards.html"},
+              {"contentType": "InfoCards", "divId": "infoCards", "contentFile": "content/pages/cms-information/component-samples/info-cards/info-cards.json"}]
             }
           },
           { 

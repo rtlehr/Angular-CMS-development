@@ -1,112 +1,70 @@
-<h1 class="mb-3">NewsComponent Usage Guide</h1>
+<h2>NewsComponent Instructions</h2>
 
 <p>
-    The <code>NewsComponent</code> is an Angular component used to display small bits of information, such as news items or blog posts. It retrieves the data from a provided JSON file and presents it in a list format.
+  The NewsComponent is designed to fetch and display a list of news articles using Angular's HttpClient. It loads the news data from a JSON file specified by the <code>fileToLoad</code> input and renders each news item with a thumbnail image, title, publication date, an excerpt of the content, and a "Read More" button.
 </p>
 
-<h2 class="mt-4">1. Installation & Import</h2>
-<p>Ensure that you import the component into your Angular module or use it as a standalone component.</p>
-
-<pre><code class="language-typescript">
-import { NewsComponent } from 'path-to-component/news.component';
-</code></pre>
-
-<h2 class="mt-4">2. Component Selector</h2>
-<p>Use the following selector to include the component in your Angular template:</p>
-
-<pre><code class="language-html">
-&lt;app-news [fileToLoad]="'news-data.json'" [divId]="'news-list'"&gt;&lt;/app-news&gt;
-</code></pre>
-
-<h2 class="mt-4">3. Input Properties</h2>
-<table class="table table-bordered">
-    <thead class="table-light">
-        <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>fileToLoad</code></td>
-            <td><code>string</code></td>
-            <td>The path to the JSON file that contains the news data.</td>
-        </tr>
-        <tr>
-            <td><code>divId</code></td>
-            <td><code>string</code></td>
-            <td>Sets the ID of the container div for the news list.</td>
-        </tr>
-    </tbody>
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON file containing the news data (e.g., 'news-data.json'). The file is fetched from the assets folder.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier for the main news list container, which can be used for custom styling or DOM manipulation.
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<h2 class="mt-4">4. Features</h2>
-<ul>
-    <li><strong>Dynamic News Loading:</strong> Loads news data from an external JSON file.</li>
-    <li><strong>News Item Layout:</strong> Each news item is displayed with an image, title, date, and content.</li>
-    <li><strong>Responsive Design:</strong> The component adapts to different screen sizes.</li>
-</ul>
-
-<h2 class="mt-4">5. Example Usage</h2>
-<p>To load a JSON file containing news data and display the list, include the component as shown below:</p>
-
-<pre><code class="language-html">
-&lt;app-news [fileToLoad]="'news-data.json'" [divId]="'news-list'"&gt;&lt;/app-news&gt;
-</code></pre>
-
-<h2 class="mt-4">6. JSON Structure</h2>
-<p>The news data should follow this structure:</p>
-
-<pre><code class="language-json">
+<h3>JSON Data Structure</h3>
+<p>
+  The component expects the JSON file to be an array of news objects with the following structure:
+</p>
+<pre><code class="json">
 [
-{
-    "id": "1",
-    "title": "Breaking News: Angular Rocks!",
-    "image": "https://via.placeholder.com/150",
-    "date": "December 11, 2024",
-    "content": "Angular has released its latest version with amazing new features and improvements..."
-},
-{
-    "id": "2",
-    "title": "Tech Trends for 2024",
-    "image": "https://via.placeholder.com/150",
-    "date": "December 5, 2024",
-    "content": "Explore the top tech trends of the year, including AI, blockchain, and more."
-},
-{
-    "id": "3",
-    "title": "Community Spotlight: Open Source Contributions",
-    "image": "https://via.placeholder.com/150",
-    "date": "November 30, 2024",
-    "content": "Highlighting the most significant contributions from the open-source community this year."
-}
+    {
+      "id": "1",
+      "title": "Breaking News: Angular Rocks!",
+      "image": "https://via.placeholder.com/150",
+      "date": "December 11, 2024",
+      "content": "Angular has released its latest version with amazing new features and improvements. Angular has released its latest version with amazing new features and improvements..."
+    },
+    {
+      "id": "2",
+      "title": "Tech Trends for 2024",
+      "image": "https://via.placeholder.com/150",
+      "date": "December 5, 2024",
+      "content": "Explore the top tech trends of the year, including AI, blockchain, and more."
+    },
+    {
+      "id": "3",
+      "title": "Community Spotlight: Open Source Contributions",
+      "image": "https://via.placeholder.com/150",
+      "date": "November 30, 2024",
+      "content": "Highlighting the most significant contributions from the open-source community this year."
+    }
 ]
 </code></pre>
-
-<h2 class="mt-4">7. News Item Layout</h2>
-<p>Each news item is displayed with the following structure:</p>
-
-<pre><code class="language-html">
-&lt;div class="list-group-item newsItem"&gt;
-&lt;div class="d-flex align-items-start"&gt;
-    &lt;img [src]="news.image" alt="News Image" class="me-3" style="width: 100px; height: auto; object-fit: cover;"&gt;
-    &lt;div&gt;
-        &lt;h5 class="mb-1"&gt;{{ news.title }}&lt;/h5&gt;
-        &lt;p class="text-muted mb-1"&gt;{{ news.date }}&lt;/p&gt;
-        &lt;p class="mb-2"&gt;{{ news.content }}&lt;/p&gt;
-        &lt;a href="#" class="btn btn-primary btn-sm"&gt;Read More&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-<h2 class="mt-4">8. Error Handling</h2>
-<p>If the JSON file cannot be loaded, the component will log an error message to the console:</p>
-
-<pre><code class="language-typescript">
-console.error('Error fetching JSON file:', error);
-</code></pre>
-
-<h2 class="mt-4">Conclusion</h2>
-<p>The <code>NewsComponent</code> provides a flexible way to display dynamic news data from a JSON file, with support for responsive design and easy customization.</p>
+<p>
+  Each news object includes:
+  <code>id</code> – a unique identifier,
+  <code>title</code> – the headline,
+  <code>image</code> – the URL for the thumbnail image,
+  <code>date</code> – the publication date, and
+  <code>content</code> – an excerpt of the article.
+</p>

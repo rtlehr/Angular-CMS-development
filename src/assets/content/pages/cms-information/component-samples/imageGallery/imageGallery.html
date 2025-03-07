@@ -1,80 +1,62 @@
-<h2>Image Gallery Component</h2>
+<h2>ImageGalleryComponent Instructions</h2>
 
-<p>This component displays an image gallery with a series of images. Each image is accompanied by a title, description, and a link to learn more. The images are loaded dynamically from a JSON file.</p>
+<p>
+  The ImageGalleryComponent displays a gallery of images in a responsive, card-based layout using Bootstrap classes. Each image card contains an image, title, short description, and a "Learn More" button linking to an external resource.
+</p>
 
-<h3>How to Use the Image Gallery Component</h3>
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON file containing image data (e.g., 'image-data.json'). The file is loaded from the assets folder.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier assigned to the main container of the gallery, useful for styling or DOM targeting.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Follow these steps to integrate and use the Image Gallery component in your Angular project:</p>
-
-<h4>1. Import the Component</h4>
-<p>First, ensure the Image Gallery component is imported and included in your module (if necessary). You can add it to your component’s imports section.</p>
-
-<pre><code>&#60;app-image-gallery [fileToLoad]="yourJsonFile" [divId]="yourDivId"&#62;&#60;/app-image-gallery&#62;</code></pre>
-
-<h4>2. Provide JSON Data</h4>
-<p>Provide a JSON file to load the images. The JSON file should contain an array of objects, each representing an image with the following properties:</p>
-
-<ul>
-  <li><strong>src</strong>: The source URL of the image.</li>
-  <li><strong>title</strong>: The title of the image.</li>
-  <li><strong>description</strong>: A short description of the image.</li>
-  <li><strong>href</strong>: A link to learn more about the image (optional).</li>
-</ul>
-
-<h4>3. Example JSON Data</h4>
-<p>Here is an example of the JSON data used to load the images:</p>
-
-<pre><code>[
-  {
-    "src": "./assets/images/motorcycle.png",
-    "title": "Image 1",
-    "description": "This is a short description for Image 1.",
-    "href": "https://example.com/image1"
-  },
-  {
-    "src": "./assets/images/snowtruck.jpg",
-    "title": "Image 2",
-    "description": "This is a short description for Image 2.",
-    "href": "https://example.com/image2"
-  },
-  {
-    "src": "./assets/images/flag.jpeg",
-    "title": "Image 3",
-    "description": "This is a short description for Image 3.",
-    "href": "https://example.com/image3"
-  }
-]</code></pre>
-
-<h4>4. The HTML Template</h4>
-<p>The component uses the <code>&#60;div&#62;</code> structure to display the images in a responsive grid layout. Each image is shown inside a <code>&#60;div&#62;</code> card with its title, description, and an optional link.</p>
-
-<pre><code>&#60;div [id]="divId" class="container my-5"&#62;
-  &#60;div class="row"&#62;
-    &#60;div class="col-md-4 mb-4" *ngFor="let image of getImages"&#62;
-      &#60;div class="card"&#62;
-        &#60;div class="image-container"&#62;
-          &#60;img src="{{ image.src }}" class="card-img-top zoom-effect" /&#62;
-        &#60;/div&#62;
-        &#60;div class="card-body text-center"&#62;
-          &#60;h5 class="card-title"&#62;{{ image.title }}&#60;/h5&#62;
-          &#60;p class="card-text"&#62;{{ image.description }}&#60;/p&#62;
-          &#60;a href="{{ image.href }}" class="btn btn-primary" target="_blank"&#62;Learn More&#60;/a&#62;
-        &#60;/div&#62;
-      &#60;/div&#62;
-    &#60;/div&#62;
-  &#60;/div&#62;
-&#60;/div&#62;</code></pre>
-
-<h4>5. Example Usage</h4>
-<p>In your parent component, you can use the Image Gallery component as follows:</p>
-
-<pre><code>&#60;app-image-gallery [fileToLoad]="'images-data.json'" [divId]="'gallery-container'"&#62;&#60;/app-image-gallery&#62;</code></pre>
-
-<h3>Options</h3>
-<ul>
-  <li><strong>fileToLoad</strong>: The name of the JSON file to load the image data from (e.g., 'images-data.json').</li>
-  <li><strong>divId</strong>: The unique ID for the gallery container (e.g., 'gallery-container').</li>
-</ul>
-
-<h4>Conclusion</h4>
-<p>This component will render an image gallery dynamically based on the provided JSON data. The layout is responsive, and each image is displayed in a Bootstrap grid format, making it easy to showcase various images with their titles, descriptions, and optional links.</p>
+<h3>JSON Data Structure</h3>
+<p>
+  The component expects the JSON file to be an array of image objects with the following structure:
+</p>
+<pre><code class="json">
+[
+    {
+      "src": "./assets/images/motorcycle.png",
+      "title": "Image 1",
+      "description": "This is a short description for Image 1.",
+      "href": "https://example.com/image1"
+    },
+    {
+      "src": "./assets/images/snowtruck.jpg",
+      "title": "Image 1",
+      "description": "This is a short description for Image 1.",
+      "href": "https://example.com/image1"
+    },
+    {
+      "src": "./assets/images/flag.jpeg",
+      "title": "Image 1",
+      "description": "This is a short description for Image 1.",
+      "href": "https://example.com/image1"
+    }
+]
+</code></pre>
+<p>
+  In this structure, the <code>src</code> property specifies the path of the image file, <code>title</code> and <code>description</code> provide the textual content for the card, and <code>href</code> defines the URL for the "Learn More" link.
+</p>

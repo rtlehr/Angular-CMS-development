@@ -1,45 +1,79 @@
-<h2>Image Slider Component</h2>
+<h2>ImageSliderComponent Instructions</h2>
 
-<p>The Image Slider component displays a set of images in a sliding format, where the images transition automatically at a set interval. Users can also manually navigate between images using the previous and next buttons.</p>
+<p>
+  The ImageSliderComponent displays a responsive image slider that automatically cycles through images. The slider's settings and images are loaded from a JSON configuration file. It features navigation buttons for manual control and smooth transitions between slides.
+</p>
 
-<h3>Inputs</h3>
-<ul>
-  <li><strong>fileToLoad (string)</strong> - The path to the JSON file containing image data. The JSON file should include the image sources, titles, and additional configuration like slider width, height, and interval.</li>
-  <li><strong>sliderWidth (string)</strong> - The width of the slider. You can set it as a percentage (e.g., '100%') or fixed pixel value (e.g., '800px'). Defaults to '100%'.</li>
-  <li><strong>sliderHeight (string)</strong> - The height of the slider. Set it to your preferred height, such as '400px'. Defaults to '300px'.</li>
-  <li><strong>imagesCount (number)</strong> - The number of images to display in the slider. This value is automatically set based on the loaded images.</li>
-  <li><strong>divId (string)</strong> - An optional ID for the component’s root div element. Use this if you need to reference the slider programmatically.</li>
-</ul>
+<h3>Component Inputs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fileToLoad</code></td>
+      <td>String</td>
+      <td>
+        The path to the JSON configuration file containing slider settings and images (e.g., 'slider-data.json').
+      </td>
+    </tr>
+    <tr>
+      <td><code>sliderWidth</code></td>
+      <td>String</td>
+      <td>
+        The CSS width for the slider (e.g., '800px' or '100%'). This value can be overridden by the JSON configuration.
+      </td>
+    </tr>
+    <tr>
+      <td><code>sliderHeight</code></td>
+      <td>String</td>
+      <td>
+        The CSS height for the slider (e.g., '400px'). This value can be overridden by the JSON configuration.
+      </td>
+    </tr>
+    <tr>
+      <td><code>imagesCount</code></td>
+      <td>Number</td>
+      <td>
+        The total number of images loaded into the slider. This value is set based on the JSON file.
+      </td>
+    </tr>
+    <tr>
+      <td><code>divId</code></td>
+      <td>String</td>
+      <td>
+        An identifier for the main slider container, useful for styling or DOM manipulation.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<h3>JSON Configuration</h3>
-<p>Here is the structure of the JSON file you should provide to the <code>fileToLoad</code> input:</p>
-
-<pre><code>
+<h3>JSON Data Structure</h3>
+<p>
+  The component expects the JSON configuration file to have the following structure:
+</p>
+<pre><code class="json">
 {
-  "width": "800px",  <!-- Slider width -->
-  "height": "400px", <!-- Slider height -->
-  "slideInterval": 3000, <!-- Time in milliseconds between slides -->
+  "width": "800px",
+  "height": "400px",
+  "slideInterval": 3000,
   "images": [
     {
-      "src": "./assets/images/flag.jpeg",  <!-- Image source -->
-      "alt": "Image 1"  <!-- Image alt text -->
+      "src": "./assets/images/flag.jpeg",
+      "alt": "Image 1"
     },
     {
-      "src": "./assets/images/airplane.jpeg", 
+      "src": "./assets/images/airplane.jpeg",
       "alt": "Image 2"
     },
     {
-      "src": "./assets/images/motorcycle.png", 
+      "src": "./assets/images/motorcycle.png",
       "alt": "Image 3"
     }
   ]
 }
 </code></pre>
-
-<h3>How It Works</h3>
-<ul>
-  <li>Images are automatically loaded from the provided JSON file.</li>
-  <li>The slider will start with the first image and automatically transition to the next image every few seconds based on the <code>slideInterval</code> value.</li>
-  <li>You can navigate between images manually using the previous and next buttons, or wait for the automatic transition.</li>
-  <li>Each image will be displayed according to the width and height defined in the JSON configuration or passed as input.</li>
-</ul>
