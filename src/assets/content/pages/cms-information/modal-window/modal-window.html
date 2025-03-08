@@ -1,8 +1,9 @@
-<trigger-modal data-content='{  "title": "Auto Triggered Modal Window",
-                                "divId": "modalWindowContent", 
-                                "contentFile": "content/pages/cms-information/modal-window/auto-triggered-modal.html",
-                                "width": 700,
-                                "height": 500 }'>
+<trigger-modal data-content='{
+                                "title": "Auto Triggered Modal Window",
+                                "divId": "modalWindowContent",
+                                "contentFile": "content/pages/cms-information/modal-window/auto-triggered-modal.html"
+                            }
+  '>
 </trigger-modal>
 
 <div class="container mt-4">
@@ -43,16 +44,6 @@
               <td>String</td>
               <td>A file path pointing to an external HTML file to be loaded inside the modal.</td>
           </tr>
-          <tr>
-              <td><code>width</code></td>
-              <td>Number</td>
-              <td>The width of the modal window in pixels.</td>
-          </tr>
-          <tr>
-              <td><code>height</code></td>
-              <td>Number</td>
-              <td>The height of the modal window in pixels.</td>
-          </tr>
       </tbody>
   </table>
 
@@ -66,8 +57,7 @@
       data-content='{  
         "title": "Hello from Button",
         "contentFile": "content/pages/cms-information/modal-window/button-modal.html",
-        "width": 700,
-        "height": 500 
+        "divId": "modalWindowContent",
       }'&gt;
   Open Modal
 &lt;/button&gt;
@@ -76,10 +66,8 @@
   <button class="btn btn-primary" data-click="openModalWindow" 
       data-content='{  
         "title": "Hello from Button",
-        "contentFile": "content/pages/cms-information/modal-window/button-modal.html",
-        "width": 750,
-        "height": 600 
-      }'>
+        "divId": "modalWindowContent",
+        "contentFile": "content/pages/cms-information/modal-window/button-modal.html"}'>
       Open Modal
   </button>
 
@@ -93,8 +81,7 @@
  data-content='{  
    "title": "Hello from Link",
    "contentFile": "content/pages/cms-information/modal-window/anchor-modal.html",
-   "width": 700,
-   "height": 500 
+   "divId": "modalWindowContent"
  }'&gt;
   Open Modal from Link
 &lt;/a&gt;
@@ -103,9 +90,8 @@
   <a href="#" data-click="openModalWindow" 
       data-content='{  
         "title": "Hello from Link",
-        "contentFile": "content/pages/cms-information/modal-window/anchor-modal.html",
-        "width": 700,
-        "height": 500 
+        "divId": "modalWindowContent",
+        "contentFile": "content/pages/cms-information/modal-window/anchor-modal.html"
       }'>
       Open Modal from Link
   </a>
@@ -121,9 +107,8 @@
       <code>
 &lt;trigger-modal data-content='{   "title": "Auto Triggered Modal Window",
                                   "divId": "modalWindowContent", 
-                                  "contentFile": "content/pages/cms-information/modal-window/auto-triggered-modal.html",
-                                  "width": 700,
-                                  "height": 500 }'&gt;
+                                  "contentFile": "content/pages/cms-information/modal-window/auto-triggered-modal.html"
+                                  }'&gt;
                                   &lt;/trigger-modal&gt;
 
       </code>
