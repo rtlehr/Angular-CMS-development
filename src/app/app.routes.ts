@@ -6,6 +6,7 @@ import { ContentBlankPageComponent } from './components/contentDisplay/content-b
 import { BlogDetailsComponent } from './components/blog/blog-details/blog-details.component';
 import { permissionGuard } from './guards/permission.guard';
 import { LoginComponent } from './components/login/login.component';
+import { HtmlEditorComponent } from './components/html-content/html-editor/html-editor.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -213,7 +214,6 @@ export const routes: Routes = [
       ]
     }
   },
-  
   { 
     path: 'blog/:url',
     component: BlogDetailsComponent 
@@ -222,6 +222,15 @@ export const routes: Routes = [
     path: 'login', 
     component: LoginComponent, 
     title: "Login",
+    data: {
+      menu: true,
+      pageContent: []
+    }
+  },
+  { 
+    path: 'edit-html', 
+    component: HtmlEditorComponent, 
+    title: "Edit HTML",
     data: {
       menu: true,
       pageContent: []
