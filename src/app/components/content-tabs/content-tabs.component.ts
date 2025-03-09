@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Input, SimpleChanges  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MainContentComponent } from '../main-content/main-content.component';
+import { HtmlContentComponent } from '../html-content/html-content/html-content.component';
 import { ImageGalleryComponent } from '../image-gallery/image-gallery.component';
 import { ImageDisplayComponent } from '../image-display/image-display.component';
 import { ImageSliderComponent } from '../image-slider/image-slider.component';
@@ -13,7 +13,7 @@ import { JsonDataService } from '../../services/json-data.service';
 @Component({
   selector: 'app-content-tabs', 
   standalone: true,
-  imports: [MainContentComponent,
+  imports: [HtmlContentComponent,
     ImageGalleryComponent,
     ImageDisplayComponent,
     ImageSliderComponent,

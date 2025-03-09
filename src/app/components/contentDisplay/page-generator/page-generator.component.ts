@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MainContentComponent } from '../../main-content/main-content.component';
+import { HtmlContentComponent } from '../../html-content/html-content/html-content.component';
 import { ImageGalleryComponent } from "../../image-gallery/image-gallery.component";
 import { NewsComponent } from '../../news/news.component';
 import { FaqComponent } from '../../faq/faq.component';
@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-page-generator',
   standalone: true, 
   imports: [
-    MainContentComponent,
+    HtmlContentComponent,
     ImageGalleryComponent,
     NewsComponent,
     FaqComponent,
@@ -53,7 +53,7 @@ export class PageGeneratorComponent implements OnInit {
 
   // Mapping of content types to component classes.
   componentMapping: { [key: string]: any } = {
-    contentPage: MainContentComponent,
+    contentPage: HtmlContentComponent,
     imageGallery: ImageGalleryComponent,
     news: NewsComponent,
     faq: FaqComponent,

@@ -1,5 +1,4 @@
 <ul class="navbar-nav ms-auto">
-
   @for(headerMenuItem of getHeaderMenuItems; track headerMenuItem.id){
 
     <ng-container>
@@ -8,20 +7,18 @@
 
         <!-- Parent menu item without children -->
         @if(!headerMenuItem.children){
-
           <a
             class="nav-link"
             [routerLink]="headerMenuItem.path"
             routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="closeMenu()">
             {{ headerMenuItem.title }}
           </a>
-
         }
 
         <!-- Parent menu item with dropdown -->
         @if(headerMenuItem.children){
-
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -31,31 +28,23 @@
             aria-expanded="false">
             {{ headerMenuItem.title }}
           </a>
-
         }
         
         <!-- Dropdown menu -->
         @if(headerMenuItem.children){
-
-          <ul
-            class="dropdown-menu"
-            [attr.aria-labelledby]="'navbarDropdown-' + headerMenuItem.id">
-
+          <ul class="dropdown-menu" [attr.aria-labelledby]="'navbarDropdown-' + headerMenuItem.id">
             @for(subItem of headerMenuItem.children; track subItem.id){
-
               <li>
                 <a
                   class="dropdown-item"
                   [routerLink]="[headerMenuItem.path, subItem.path]"
-                  routerLinkActive="active">
+                  routerLinkActive="active"
+                  (click)="closeMenu()">
                   {{ subItem.title }}
                 </a>
               </li>
-
             }
-
           </ul>
-
         }
 
       </li>
@@ -63,5 +52,4 @@
     </ng-container>
 
   }
-
 </ul>

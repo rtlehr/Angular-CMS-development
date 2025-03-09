@@ -6,7 +6,7 @@ import { BlogService } from '../../../services/blog.service';
 import { BlogPost } from '../../../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
-import { MainContentComponent } from '../../main-content/main-content.component';
+import { HtmlContentComponent } from '../../html-content/html-content/html-content.component';
 import { ImageGalleryComponent } from '../../image-gallery/image-gallery.component';
 import { ImageDisplayComponent } from '../../image-display/image-display.component';
 import { ImageSliderComponent } from '../../image-slider/image-slider.component';
@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    MainContentComponent,
+    HtmlContentComponent,
     ImageDisplayComponent,
     ImageGalleryComponent,
     ImageSliderComponent,

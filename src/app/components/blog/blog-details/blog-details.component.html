@@ -58,11 +58,11 @@
                 <!-- Render dynamic content based on contentType -->
                 <ng-container *ngFor="let pageContent of blogPost.blogText; trackBy: trackByContentId">
                   <ng-container [ngSwitch]="pageContent.contentType">
-                    <app-main-content
+                    <app-html-content
                       *ngSwitchCase="'contentPage'"
                       [fileToLoad]="pageContent.contentFile"
                       [divId]="pageContent.divId"
-                    ></app-main-content>
+                    ></app-html-content>
                     <app-image-gallery
                       *ngSwitchCase="'imageGallery'"
                       [fileToLoad]="pageContent.contentFile"

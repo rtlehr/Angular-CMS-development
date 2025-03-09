@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit, SimpleChanges, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { ModalWindowService } from '../../services/modal-window.service';
+import { ModalWindowService } from '../../../services/modal-window.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
@@ -8,13 +8,13 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 
 @Component({
-  selector: 'app-main-content',
+  selector: 'app-html-content',
   standalone: true,
   imports: [HttpClientModule],
-  templateUrl: './main-content.component.html',
-  styleUrls: ['./main-content.component.scss']
+  templateUrl: './html-content.component.html',
+  styleUrls: ['./html-content.component.scss']
 })
-export class MainContentComponent implements OnInit, OnChanges {
+export class HtmlContentComponent implements OnInit, OnChanges {
 
   @Input() fileToLoad: string = '';
   @Input() divId: string = '';

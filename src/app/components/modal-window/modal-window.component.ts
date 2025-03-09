@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ModalWindowService } from '../../services/modal-window.service';
-import { MainContentComponent } from '../main-content/main-content.component';
+import { HtmlContentComponent } from '../html-content/html-content/html-content.component';
 
 @Component({
   selector: 'app-modal-window',
   standalone: true,
-  imports: [MainContentComponent],
+  imports: [HtmlContentComponent],
   templateUrl: './modal-window.component.html',
   styleUrl: './modal-window.component.scss'
 })

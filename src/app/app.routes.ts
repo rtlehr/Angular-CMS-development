@@ -224,10 +224,7 @@ export const routes: Routes = [
     title: "Login",
     data: {
       menu: true,
-      pageContent: [
-        { contentType: "contentPage", divId: "homeContentOne", contentFile: "content/pages/home/home-content-one.html" },
-        { contentType: "contentPage", permission: "admin", divId: "homeContentTwo", contentFile: "content/pages/home/home-content-two.html" }
-      ]
+      pageContent: []
     }
   },
   
