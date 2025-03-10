@@ -1,0 +1,13 @@
+<div class="editor-wrapper">
+    <h2>Quill Editor with Save</h2>
+    <quill-editor 
+      [(ngModel)]="editorContent"
+      [modules]="editorModules"
+      placeholder="Compose something epic...">
+    </quill-editor>
+    <button (click)="saveContent()">Save</button>
+    <div class="preview">
+      <h3>Editor Content Preview</h3>
+      <div [innerHTML]="editorContent"></div>
+    </div>
+  </div>

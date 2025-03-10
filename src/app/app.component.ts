@@ -10,7 +10,7 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { HasPermissionDirective } from './directives/permission.directive';
 import { PermissionService } from './services/permission.service';
 
-import { InfoCardsComponent } from './components/info-cards/info-cards.component';
+import { EditorComponent } from './components/html-content/editor/editor.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ import { InfoCardsComponent } from './components/info-cards/info-cards.component
     RouterOutlet,
     ModalWindowComponent,
     HasPermissionDirective,
-    InfoCardsComponent,
+    EditorComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
