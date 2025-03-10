@@ -3,6 +3,7 @@
     <quill-editor 
       [(ngModel)]="editorContent"
       [modules]="editorModules"
+      (onEditorCreated)="onEditorCreated($event)"
       placeholder="Compose something epic...">
     </quill-editor>
     <button (click)="saveContent()">Save</button>

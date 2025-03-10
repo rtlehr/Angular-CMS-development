@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class EditorComponent {
   // Bind the editor content to a variable for two-way binding
   editorContent: string = '';
+  quillInstance: any;
 
   // Configure the Quill modules (toolbar options, etc.)
   editorModules = {
@@ -22,13 +23,24 @@ export class EditorComponent {
     ]
   };
 
+  // Capture the underlying Quill instance when it is created.
+  onEditorCreated(quill: any): void {
+    console.log('onEditorCreated fired:', quill);
+    this.quillInstance = quill;
+  }
+
   // Optional: Event handler to log content changes
   handleContentChanged(event: any) {
     console.log('Editor content changed:', event);
   }
 
   saveContent(): void {
-    console.log('Save button clicked. Editor content:', this.editorContent);
+    if (this.quillInstance) {
+      console.log('Delta content:', this.quillInstance.getContents());
+      console.log('HTML content:', this.quillInstance.root.innerHTML);
+    } else {
+      console.warn('Quill instance is not available.');
+    }
   }
   
 }
