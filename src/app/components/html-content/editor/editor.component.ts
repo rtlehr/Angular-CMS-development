@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './editor.component.scss',
 })
 export class EditorComponent {
-  // Bind the editor content to a variable for two-way binding
+  // Bind the editor content to a variable for two-way binding 
   editorContent: string = '';
   quillInstance: any;
 

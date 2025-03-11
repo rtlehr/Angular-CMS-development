@@ -6,9 +6,9 @@
       (onEditorCreated)="onEditorCreated($event)"
       placeholder="Compose something epic...">
     </quill-editor>
+    </div>
     <button (click)="saveContent()">Save</button>
     <div class="preview">
       <h3>Editor Content Preview</h3>
-      <div [innerHTML]="editorContent"></div>
-    </div>
+      <div [innerHTML]="editorContent"></div> 
   </div>
