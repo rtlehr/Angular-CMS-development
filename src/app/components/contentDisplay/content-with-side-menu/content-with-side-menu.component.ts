@@ -7,7 +7,7 @@ import { pageContent } from '../../../models/page-content.model';
 import { CommonModule, Location } from '@angular/common';
 
 @Component({
-  selector: 'app-content-with-side-menu',
+  selector: 'app-content-with-side-menu', 
   standalone: true,
   imports: [RouterModule, RouterOutlet, CommonModule],
   templateUrl: './content-with-side-menu.component.html',

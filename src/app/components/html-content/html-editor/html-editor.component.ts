@@ -31,12 +31,14 @@ export class HtmlEditorComponent {
   };
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
+
     this.htmlForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       permission: ['public', Validators.required],
       // "content" will hold the HTML output from the Quill editor
       content: ['', [Validators.required, Validators.minLength(10)]]
     });
+    
   }
 
   // Called when the Quill editor is created; captures the instance if needed.
@@ -46,6 +48,7 @@ export class HtmlEditorComponent {
   }
 
   submitForm() {
+
     if (this.htmlForm.invalid) {
       this.errorMessage = 'Please fill out all required fields.';
       return;

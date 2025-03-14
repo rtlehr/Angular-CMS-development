@@ -106,7 +106,7 @@ export class BlogDetailsComponent implements OnInit, OnDestroy {
 
   filterContentByPermissions(contentArray: any[], permissions: string[]): any[] {
     return contentArray.filter(item => !item.permission || permissions.includes(item.permission));
-  }
+  } 
 
   closeSidebar(): void {
     const sidebarElement = document.getElementById('sidebarMenu');
