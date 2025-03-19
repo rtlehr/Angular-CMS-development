@@ -50,7 +50,7 @@
                   class="card-img-top"
                   [alt]="blogPost.title"
                 />
-                
+
               }
                 <div class="card-body">
 
@@ -60,13 +60,17 @@
                   <p class="text-muted">
                     By {{ blogPost.author }} | {{ blogPost.date | date: 'longDate' }}
                   </p>
+                }
+
+                @if(blogPost.tags){
                   <div class="mb-3">
                     <span *ngFor="let tag of blogPost.tags" class="tag badge me-2">
                       {{ tag }}
                     </span>
                   </div>
-
                 }
+
+                
               
               
 

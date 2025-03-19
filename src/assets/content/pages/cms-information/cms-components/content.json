@@ -3,6 +3,8 @@
       "url": "content",
       "title": "Content",
       "divId": "contentType",   
+      "imageUrl": "./assets/images/motorcycle.png", 
+      "tags": ["Tag One", "Tag Two", "Tag Three"],
       "blogText": [{"contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/cms-components/content/content.html"}]
     },
     {
