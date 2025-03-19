@@ -36,25 +36,40 @@
       <!-- Content Section -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="content-wrapper">
+
           <ng-container *ngIf="blogPost; else loading">
+
+
             <div class="card shadow-sm">
-              <img
-                *ngIf="blogPost.imageUrl"
-                [src]="blogPost.imageUrl"
-                class="card-img-top"
-                [alt]="blogPost.title"
-              />
-              <div class="card-body">
-                <h1 class="card-title">{{ blogPost.title }}</h1>
-                <p class="text-muted">
-                  By {{ blogPost.author }} | {{ blogPost.date | date: 'longDate' }}
-                </p>
-                <div class="mb-3">
-                  <span *ngFor="let tag of blogPost.tags" class="tag badge me-2">
-                    {{ tag }}
-                  </span>
-                </div>
-  
+
+              @if(blogPost.imageUrl){
+                
+                <img
+                  *ngIf="blogPost.imageUrl"
+                  [src]="blogPost.imageUrl"
+                  class="card-img-top"
+                  [alt]="blogPost.title"
+                />
+                
+              }
+                <div class="card-body">
+
+                  @if(blogPost.author){
+
+                  <h1 class="card-title">{{ blogPost.title }}</h1>
+                  <p class="text-muted">
+                    By {{ blogPost.author }} | {{ blogPost.date | date: 'longDate' }}
+                  </p>
+                  <div class="mb-3">
+                    <span *ngFor="let tag of blogPost.tags" class="tag badge me-2">
+                      {{ tag }}
+                    </span>
+                  </div>
+
+                }
+              
+              
+
                 <!-- Render dynamic content based on contentType -->
                 <ng-container *ngFor="let pageContent of blogPost.blogText; trackBy: trackByContentId">
                   <ng-container [ngSwitch]="pageContent.contentType">
