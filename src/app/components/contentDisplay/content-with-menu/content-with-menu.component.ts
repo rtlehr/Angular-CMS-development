@@ -52,6 +52,7 @@ export class ContentWithMenuComponent implements OnInit, OnDestroy {
   currentBlogSlug: string = '';
   firstBlogPost: any;
 slug: any;
+cleanedPath: string = '';
 
   private routeSubscription!: Subscription;
 
@@ -76,21 +77,24 @@ slug: any;
       const currentPath = this.location.path();
       console.log("currentPath.length: " + currentPath.split('/').length);
 
-      if(currentPath.split('/').length <= 2)
+      if(!this.slug)
       {
+        this.cleanedPath = currentPath;
         this.baseBlogUrl = currentPath;
       }
       else
       {
-        this.baseBlogUrl = currentPath.split('/').slice(0, -1).join('/');
+        this.cleanedPath = currentPath.split('/').slice(0, -1).join('/');
+        this.baseBlogUrl = this.cleanedPath;
       }
       
       console.log("this.baseBlogUrl: " + this.baseBlogUrl);
 
-      //this.blogPostsUrl = `assets/content/pages${cleanedPath}/content.json`;
+      this.blogPostsUrl = `/assets/content/pages${this.cleanedPath}/content.json`;
+      console.log("this.blogPostsUrl: " + this.blogPostsUrl);
       //this.blogPostsUrl = `assets/content/pages/cms-information/component-samples/content.json`;
-      this.blogPostsUrl = 'assets/content/pages/blog/blog-posts.json';
-      
+      //this.blogPostsUrl = 'assets/content/pages/blog/blog-posts.json';
+
       this.loadAllBlogPosts();
 
     });
