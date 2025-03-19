@@ -7,10 +7,11 @@ import { BlogDetailsComponent } from './components/blog/blog-details/blog-detail
 import { permissionGuard } from './guards/permission.guard';
 import { LoginComponent } from './components/login/login.component';
 import { HtmlEditorComponent } from './components/html-content/html-editor/html-editor.component';
+import { ContentWithMenuComponent } from './components/contentDisplay/content-with-menu/content-with-menu.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  
+
   { 
     path: 'home', 
     component: PageGeneratorComponent, 
@@ -23,19 +24,16 @@ export const routes: Routes = [
       ]
     }
   },
-  
+
   { 
     path: 'cms-information', 
     component: ContentBlankPageComponent,
     title: "CMS Information",
-    data: {
-      menu: true,
-      pageContent: []
-    },
+    data: { menu: true, pageContent: [] },
     children: [
       { 
         path: 'cms-components',
-        component: ContentWithSideMenuComponent,
+        component: ContentWithMenuComponent,
         title: 'CMS Components',
         data: {
           menu: true, 
@@ -43,105 +41,16 @@ export const routes: Routes = [
             { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/component-samples/news/news.html" },
             { contentType: "news", divId: "contentBlockTwo", contentFile: "content/pages/cms-information/component-samples/news/page-news.json" }
           ]
-        },
-        children: [
-          { 
-            path: 'content',
-            component: PageGeneratorComponent,
-            title: 'Content',
-            data: {
-              menu: true, 
-              pageContent: [{"contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/component-samples/content/content.html"}]
-            }
-          },{ 
-            path: 'news',
-            component: PageGeneratorComponent,
-            title: 'News',
-            data: {
-              menu: true, 
-              pageContent: [
-                { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/component-samples/news/news.html" },
-                { contentType: "news", divId: "contentBlockTwo", contentFile: "content/pages/cms-information/component-samples/news/page-news.json" }
-              ]
-            }
-          },
-          { 
-            path: 'faq',
-            component: PageGeneratorComponent,
-            title: 'FAQs',
-            data: {
-              menu: true, 
-              pageContent: [
-                { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/component-samples/faqs/faqs.html" },
-                { contentType: "faq", divId: "contentBlockTwo", contentFile: "content/pages/cms-information/component-samples/faqs/page-faq.json" }
-              ]
-            }
-          },
-          { 
-            path: 'image-gallery',
-            component: PageGeneratorComponent,
-            title: 'Image Gallery',
-            data: {
-              menu: true, 
-              pageContent: [
-                { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/component-samples/imageGallery/imageGallery.html" },
-                { contentType: "imageGallery", divId: "contentBlockTwo", contentFile: "content/pages/cms-information/component-samples/imageGallery/page-image-gallery-images.json" }
-              ]
-            }
-          },
-          { 
-            path: 'image-display',
-            component: PageGeneratorComponent,
-            title: 'Image Display',
-            data: {
-              menu: true, 
-              pageContent: [
-                { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/component-samples/imageDisplay/imageDisplay.html" },
-                { contentType: "imageDisplay", divId: "contentBlockTwo", contentFile: "content/pages/cms-information/component-samples/imageDisplay/page-image-display.json" }
-              ]
-            }
-          },
-          { 
-            path: 'image-slider',
-            component: PageGeneratorComponent,
-            title: 'Image Slider',
-            data: {
-              menu: true, 
-              pageContent: [{"contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/component-samples/imageSlider/imageSlider.html"},
-              {"contentType": "imageSlider", "divId": "contentBlockTwo", "contentFile": "content/pages/cms-information/component-samples/imageSlider/image-slider-images.json"}]
-            }
-          },
-          { 
-            path: 'tabs',
-            component: PageGeneratorComponent,
-            title: 'Tabs',
-            data: {
-              menu: true, 
-              pageContent: [{"contentType": "tabs", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/component-samples/tabs/content-tabs.json"}]
-            }
-          },
-          { 
-            path: 'info-card-sample',
-            component: PageGeneratorComponent,
-            title: 'Info Cards',
-            data: {
-              menu: true, 
-              pageContent: [{"contentType": "contentPage", "divId": "infoCardsContent", "contentFile": "content/pages/cms-information/component-samples/info-cards/info-cards.html"},
-              {"contentType": "InfoCards", "divId": "infoCards", "contentFile": "content/pages/cms-information/component-samples/info-cards/info-cards.json"}]
-            }
-          },
-          { 
-            path: 'form-sample',
-            component: PageGeneratorComponent,
-            title: 'Forms',
-            data: {
-              menu: true, 
-              pageContent: [{"contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/component-samples/forms/forms.html"},
-              {"contentType": "form", "divId": "contentBlockTwo", "contentFile": "content/pages/cms-information/component-samples/forms/page-form.json"}]
-            }
-          }
-        ]
+        }
       },
+
+  { 
+    path: 'cms-components/:url',
+    component: ContentWithMenuComponent 
+  },
+
+
+
       { 
         path: 'cms-cards',
         component: ContentWithSideMenuComponent,
@@ -162,24 +71,15 @@ export const routes: Routes = [
               menu: true,
               pageContent: [
                 { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/cms-cards/info-highlite/info-highlite.html" },
-                {"contentType": "infoHighlight", "divId": "infoHighlight", "contentFile": "content/pages/cms-information/cms-cards/info-highlite/info-highlite.json"}]
-            }
-          },
-          { 
-            path: 'business-cards',
-            component: PageGeneratorComponent,
-            title: 'Business Cards',
-            data: {
-              menu: true,
-              pageContent: [
-                { contentType: "contentPage", divId: "contentBlockOne", contentFile: "content/pages/cms-information/cms-cards/business-card/business-card.html" },
-                {"contentType": "businesscard", "divId": "businesscard", "contentFile": "content/pages/cms-information/cms-cards/business-card/business-card.json"}]
+                { contentType: "infoHighlight", divId: "infoHighlight", contentFile: "content/pages/cms-information/cms-cards/info-highlite/info-highlite.json" }
+              ]
             }
           }
         ]
       },
+
       { 
-        path: 'modal-wondow',
+        path: 'modal-window',
         component: PageGeneratorComponent,
         title: 'Modal Window',
         data: {
@@ -202,7 +102,7 @@ export const routes: Routes = [
       }
     ]
   },
-  
+
   { 
     path: 'blog',
     component: BlogListComponent, 
@@ -210,36 +110,32 @@ export const routes: Routes = [
     data: {
       menu: true,
       pageContent: [
-        { contentType: "blogList", divId: "blogList", contentFile: "assets/content/pages/blog/blog-posts.json" }
+        { contentType: "blogList", divId: "blogList", contentFile: "assets/content/pages/blog/content.json" }
       ]
     }
   },
+
   { 
     path: 'blog/:url',
-    component: BlogDetailsComponent 
+    component: ContentWithMenuComponent 
   },
+
   { 
     path: 'login', 
     component: LoginComponent, 
     title: "Login",
-    data: {
-      menu: true,
-      pageContent: []
-    }
+    data: { menu: true, pageContent: [] }
   },
+
   { 
     path: 'edit-html', 
     component: HtmlEditorComponent, 
     title: "Edit HTML",
-    data: {
-      menu: true,
-      pageContent: []
-    }
+    data: { menu: true, pageContent: [] }
   },
-  
+
   { 
     path: '**', 
     component: PageGeneratorComponent 
   }
 ];
-

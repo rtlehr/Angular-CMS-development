@@ -12,6 +12,8 @@ import { PermissionService } from './services/permission.service';
 
 import { EditorComponent } from './components/html-content/editor/editor.component';
 
+import { ContentWithMenuComponent } from './components/contentDisplay/content-with-menu/content-with-menu.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,7 +24,8 @@ import { EditorComponent } from './components/html-content/editor/editor.compone
     RouterOutlet,
     ModalWindowComponent,
     HasPermissionDirective,
-    EditorComponent
+    EditorComponent,
+    ContentWithMenuComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
