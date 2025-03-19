@@ -135,18 +135,6 @@ export const routes: Routes = [
   },
 
   { 
-    path: 'content-test', 
-    component: ContentWithMenuComponent, 
-    title: "Content Test",
-    data: { menu: true, pageContent: [] }
-  },
-
-  { 
-    path: 'content-test/:url',
-    component: ContentWithMenuComponent 
-  },
-
-  { 
     path: '**', 
     component: PageGeneratorComponent 
   }
