@@ -7,6 +7,7 @@ import { BlogDetailsComponent } from './components/blog/blog-details/blog-detail
 import { permissionGuard } from './guards/permission.guard';
 import { LoginComponent } from './components/login/login.component';
 import { HtmlEditorComponent } from './components/html-content/html-editor/html-editor.component';
+import { ContentWithMenuComponent } from './components/contentDisplay/content-with-menu/content-with-menu.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -235,6 +236,19 @@ export const routes: Routes = [
       menu: true,
       pageContent: []
     }
+  },
+  { 
+    path: 'content-test', 
+    component: ContentWithMenuComponent, 
+    title: "content test",
+    data: {
+      menu: true,
+      pageContent: []
+    }
+  },
+  { 
+    path: 'content-test/:url',
+    component: ContentWithMenuComponent 
   },
   
   { 
