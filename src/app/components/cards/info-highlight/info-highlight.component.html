@@ -5,7 +5,7 @@
        [style.height.px]="imageSize"
        *ngIf="images && images.length > 0 && images[currentIndex]">
 
-    <img [src]="images[currentIndex]?.imageUrl" 
+    <img [src]="images[currentIndex].imageUrl" 
          class="main-image" 
          alt="Displayed Image" 
          [style.width.px]="imageSize" 
@@ -14,7 +14,7 @@
     @if(images[currentIndex].textBoxes && images[currentIndex].textBoxes.length){
       <div class="overlay-text">
         <p [style.font-size.rem]="getFontSize()">
-          {{ images[currentIndex].textBoxes[0]?.text }}
+          {{ images[currentIndex].textBoxes[0].text }}
         </p>  
       </div>
     } 
