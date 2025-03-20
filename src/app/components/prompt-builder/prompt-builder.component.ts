@@ -57,6 +57,29 @@ export class PromptBuilderComponent {
     'Eye-level perspective'
   ];
 
+  techMedium: string[] = [
+    'Digital Painting',
+    'Photorealistic Render',
+    'Oil Painting',
+    'Watercolor',
+    'Pencil Sketch',
+    'Anime Style',
+    '3D Render',
+    'Pixel Art',
+    'Charcoal Drawing',
+    'Ink Illustration',
+    'Vector Illustration',
+    'Mixed Media',
+    'Concept Art',
+    'Comic Book Style',
+    'Matte Painting',
+    'Pastel Art',
+    'Low Poly Render',
+    'Claymation Style',
+    'Collage',
+    'Stencil Art'
+  ];
+
   generatedPrompt: string = '';
   isLoading: boolean = false;
 

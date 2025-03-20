@@ -41,10 +41,14 @@
       </label>
       <textarea [(ngModel)]="promptDetails.environment" name="environment" required></textarea>
   
+
       <label>Technical Medium or Rendering Style
         <small class="hint">Medium or rendering (e.g., Digital painting, Photorealistic render).</small>
       </label>
-      <input type="text" [(ngModel)]="promptDetails.medium" name="medium" required />
+      <select [(ngModel)]="promptDetails.medium" name="camera" required>
+        <option value="">-- Select a Technical Medium --</option>
+        <option *ngFor="let med of techMedium" [value]="med">{{ med }}</option>
+      </select>
   
       <label>Desired Quality & Resolution</label>
       <select [(ngModel)]="promptDetails.quality" name="quality" required>
