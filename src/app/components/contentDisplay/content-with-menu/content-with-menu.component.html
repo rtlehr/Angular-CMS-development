@@ -125,6 +125,10 @@
                       *ngSwitchCase="'businesscard'"
                       [fileToLoad]="pageContent.contentFile"
                     ></app-business-card>
+                    <app-info-cards
+                      *ngSwitchCase="'InfoCards'"
+                      [fileToLoad]="pageContent.contentFile">
+                    </app-info-cards>
                     <ng-container *ngSwitchDefault>
                       <p>Select a component to display.</p>
                     </ng-container>

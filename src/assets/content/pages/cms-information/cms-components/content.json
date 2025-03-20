@@ -50,6 +50,13 @@
                   {"contentType": "form", "divId": "contentBlockTwo", "contentFile": "content/pages/cms-information/cms-components/forms/page-form.json"}]
     },
     {
+      "url": "info-cards",
+      "title": "info Cards",
+      "divId": "infocardsType",
+      "blogText": [{"contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/cms-components/info-cards/info-cards.html"},
+      {"contentType": "InfoCards", "divId": "contentBlockTwo", "contentFile": "content/pages/cms-information/cms-components/info-cards/info-cards.json"}]
+    },
+    {
       "url": "tabs",
       "title": "Tabs",
       "divId": "tabType",

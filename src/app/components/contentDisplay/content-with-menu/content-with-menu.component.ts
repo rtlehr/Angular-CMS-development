@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { PermissionService } from '../../../services/permission.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { InfoCardsComponent } from '../../info-cards/info-cards.component';
 
 @Component({
   selector: 'app-content-with-menu',
@@ -37,6 +38,7 @@ import { Router } from '@angular/router';
     RouterModule,
     InfoHighlightComponent,
     BusinessCardComponent,
+    InfoCardsComponent,
   ],
   templateUrl: './content-with-menu.component.html',
   styleUrl: './content-with-menu.component.scss'
