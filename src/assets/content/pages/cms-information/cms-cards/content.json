@@ -1,0 +1,16 @@
+[
+    {
+      "url": "info-highlight",
+      "title": "Info Highlight",
+      "divId": "infoHighlight",   
+      "blogText": [{ "contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/cms-cards/info-highlite/info-highlite.html" },
+        { "contentType": "infoHighlight", "divId": "infoHighlight", "contentFile": "content/pages/cms-information/cms-cards/info-highlite/info-highlite.json" }]
+    },
+    {
+        "url": "business-cards",
+        "title": "Business Cards",
+        "divId": "businessCards",   
+        "blogText": [{ "contentType": "contentPage", "divId": "contentBlockOne", "contentFile": "content/pages/cms-information/cms-cards/business-card/business-card.html" },
+          { "contentType": "businesscard", "divId": "infoHighlight", "contentFile": "content/pages/cms-information/cms-cards/business-card/business-card.json" }]
+    }
+  ]

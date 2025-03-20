@@ -3,26 +3,31 @@
 "autoScroll": true,
 "images" : [
     {
+      "id": "1",
       "imageUrl": "./assets/images/motorcycle.png", 
       "title": "This is Box 1",
       "textBoxes": []
     },
     {
+      "id": "2",
       "imageUrl": "./assets/images/snowtruck.jpg",
       "title": "This is Box 2",
       "textBoxes": [{ "text": "fringilla mi vel, fermentum massa. Integer mollis nunc erat, nec aliquet quam mattis vestibulum. " }]
     },
     {
+      "id": "3",
       "imageUrl": "./assets/images/motorcycle.png",
       "title": "This is Box 3",
       "textBoxes": [{ "text": "Aenean ex libero, ullamcorper non neque in, vulputate dignissim nisi. Nam tincidunt sagittis lacus, sit amet semper odio aliquet eu." }]
     },
     {
+      "id": "4",
       "imageUrl": "./assets/images/snowtruck.jpg",
       "title": "This is Box 4",
       "textBoxes": [{ "text": "bibendum urna. Suspendisse tristique metus quis viverra commodo. " }]
     },
     {
+      "id": "5",
       "imageUrl": "./assets/images/motorcycle.png", 
       "title": "This is Box 5",
       "textBoxes": []

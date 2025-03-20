@@ -1,5 +1,5 @@
 <ul class="navbar-nav ms-auto">
-  @for(headerMenuItem of getHeaderMenuItems; track headerMenuItem.id){
+  @for(headerMenuItem of getHeaderMenuItems; track $index	){
 
     <ng-container>
 
@@ -33,7 +33,7 @@
         <!-- Dropdown menu -->
         @if(headerMenuItem.children){
           <ul class="dropdown-menu" [attr.aria-labelledby]="'navbarDropdown-' + headerMenuItem.id">
-            @for(subItem of headerMenuItem.children; track subItem.id){
+            @for(subItem of headerMenuItem.children; track $index	){
               <li>
                 <a
                   class="dropdown-item"

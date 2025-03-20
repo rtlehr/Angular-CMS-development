@@ -80,7 +80,7 @@ export class InfoHighlightComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     if (this.autoScrollSub) {
-      this.autoScrollSub.unsubscribe();
+      this.autoScrollSub.unsubscribe(); 
     }
   }
 

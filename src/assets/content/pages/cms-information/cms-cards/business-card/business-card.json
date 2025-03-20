@@ -1,6 +1,7 @@
 {
 "people": [
     {
+      "id": "1",
       "name": "John Doe",
       "photo": "./assets/images/motorcycle.png",
       "businessPhone": "123-456-7890",
@@ -13,6 +14,7 @@
       "bio": "John is a software developer with 10 years of experience."
     },
     {
+      "id": "2",
       "name": "Jane Smith",
       "photo": "./assets/images/motorcycle.png",
       "businessPhone": "234-567-8901",
@@ -25,6 +27,7 @@
       "bio": "Jane is a graphic designer passionate about branding and UI/UX." 
     },
     {
+      "id": "3",
       "name": "Michael Brown",
       "photo": "./assets/images/motorcycle.png",
       "businessPhone": "345-678-9012",

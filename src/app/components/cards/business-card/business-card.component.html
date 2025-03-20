@@ -1,7 +1,7 @@
 <div class="container"> 
   <div class="row">
 
-    @for(person of getPeople;track person.id){
+    @for(person of getPeople;track $index){
 
       <div class="col-md-4">
         <div class="business-card">
@@ -15,7 +15,7 @@
             <p><strong>Email:</strong> <a [href]="'mailto:' + person.email">{{ person.email }}</a></p>
             <div class="social-links">
 
-              @for(link of person.socialMedia; track link.id){
+              @for(link of person.socialMedia; track $index){
 
                 <a [href]="link.url" target="_blank">
                   <i [class]="'fab ' + link.icon"></i>
