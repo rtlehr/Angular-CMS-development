@@ -48,10 +48,14 @@ export class FormGeneratorComponent {
 
   }
 
+  //get getFormFields() {
+
+   // return this.form[0].fields;
+
+  //}
+
   get getFormFields() {
-
-    return this.form[0].fields;
-
+    return this.form[0]?.fields ?? [];
   }
 
 } 

@@ -3,7 +3,7 @@
         <h2 class="mb-4">Sample Form Fields</h2>
         <form>
 
-            @for(formFields of getFormFields; track formFields.id) 
+            @for(formFields of getFormFields; track $index) 
             {           
 
                 @if(formFields.type == "textInput")
@@ -68,7 +68,7 @@
                     <fieldset class="mb-3">
                         <legend class="form-label" [ngClass]="{ 'mandatory': formFields.required }">{{ formFields.requestedInfo}}</legend>
 
-                        @for(options of formFields.options ; track options.id)
+                        @for(options of formFields.options ; track $index)
                         {
 
                             <div class="form-check">
@@ -90,7 +90,7 @@
                         <legend class="form-label" [ngClass]="{ 'mandatory': formFields.required }">{{ formFields.requestedInfo}}</legend>
                         
 
-                        @for(options of formFields.options; track options.id)
+                        @for(options of formFields.options; track $index)
                         {
                             
                             <div class="form-check">

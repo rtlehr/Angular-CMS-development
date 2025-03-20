@@ -67,17 +67,17 @@ cleanedPath: string = '';
   ) {}
 
   ngOnInit(): void {
-    console.log("INIT ContentWithMenuComponent");
+    //console.log("INIT ContentWithMenuComponent");
     this.permissions = this.permissionService.getPermissionsArray();
 
     this.routeSubscription = this.activatedRoute.paramMap.subscribe(params => {
       
       this.slug = params.get('url');
-      console.log("Slug: " + this.slug);
+      //console.log("Slug: " + this.slug);
 
       // Construct the base URL from the current location path.
       const currentPath = this.location.path();
-      console.log("currentPath.length: " + currentPath.split('/').length);
+      //console.log("currentPath.length: " + currentPath.split('/').length);
 
       if(!this.slug)
       {
@@ -90,10 +90,10 @@ cleanedPath: string = '';
         this.baseBlogUrl = this.cleanedPath;
       }
       
-      console.log("this.baseBlogUrl: " + this.baseBlogUrl);
+      //console.log("this.baseBlogUrl: " + this.baseBlogUrl);
 
       this.blogPostsUrl = `/assets/content/pages${this.cleanedPath}/content.json`;
-      console.log("this.blogPostsUrl: " + this.blogPostsUrl);
+      //console.log("this.blogPostsUrl: " + this.blogPostsUrl);
       //this.blogPostsUrl = `assets/content/pages/cms-information/component-samples/content.json`;
       //this.blogPostsUrl = 'assets/content/pages/blog/blog-posts.json';
 
@@ -103,14 +103,14 @@ cleanedPath: string = '';
   }
 
   private loadAllBlogPosts(): void {
-    console.log("**** Loading ALL Blog Post");
+    //console.log("**** Loading ALL Blog Post");
     this.blogService.getAllPosts(this.blogPostsUrl).subscribe({
       next: posts => {
-        console.log("Received posts:", posts);  // Debugging log
+        //console.log("Received posts:", posts);  // Debugging log
         if (Array.isArray(posts) && posts.length > 0) {
           this.blogPosts = posts;
           this.firstBlogPost = posts[0];
-          console.log("First Blog Post:", this.firstBlogPost); // Debugging log
+          //console.log("First Blog Post:", this.firstBlogPost); // Debugging log
 
           if (!this.slug) {
             this.slug = this.firstBlogPost.url;
@@ -118,7 +118,7 @@ cleanedPath: string = '';
             this.router.navigate(url);
           }
           this.currentBlogSlug = this.slug;
-          console.log("this.currentBlogSlug: "+ this.currentBlogSlug)
+          //console.log("this.currentBlogSlug: "+ this.currentBlogSlug)
           this.loadBlogPost(this.currentBlogSlug);
 
         } else {
@@ -136,11 +136,11 @@ cleanedPath: string = '';
   
   
   private loadBlogPost(slug: string): void {
-    console.log("**** Loading Blog Post");
+    //console.log("**** Loading Blog Post");
       this.blogService.getPostByURL(this.blogPostsUrl, slug).subscribe({
       //this.blogService.getPostByURL(this.blogPostsUrl, 'content').subscribe({
       next: post => {
-        console.log("Loading Blog Post: " + this.blogPostsUrl);
+        //console.log("Loading Blog Post: " + this.blogPostsUrl);
         post.blogText = this.filterContentByPermissions(post.blogText, this.permissions);
         this.blogPost = post;
       },

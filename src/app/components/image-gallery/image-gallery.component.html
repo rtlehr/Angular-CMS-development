@@ -1,6 +1,6 @@
 <div [id]="divId" class="container my-5">
   <div class="row">
-    @for(images of getImages; track images.id) 
+    @for(images of getImages; track $index) 
     {
       <div class="col-md-4 col-sm-6 mb-4"> 
         <div class="card">

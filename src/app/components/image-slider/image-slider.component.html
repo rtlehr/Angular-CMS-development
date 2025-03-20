@@ -10,7 +10,7 @@
     [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
     [style.transition]="'transform 0.5s ease-in-out'"
   >
-  @for(image of images; track image.id){
+  @for(image of images; track $index){
 
     <div class="slider-item">
       <img [src]="image.src" [alt]="image.alt" [title]="image.title" />

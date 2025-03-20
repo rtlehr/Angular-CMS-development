@@ -31,7 +31,7 @@ export class HtmlContentComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    console.log("ngOnInit for MainContentComponent");
+    //console.log("ngOnInit for MainContentComponent");
     // If fileToLoad is already defined when the component is created,
     // ensure content is loaded.
     if (this.fileToLoad) {
@@ -40,7 +40,7 @@ export class HtmlContentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges for MainContentComponent", changes);
+    //console.log("ngOnChanges for MainContentComponent", changes);
     if (changes['fileToLoad'] && changes['fileToLoad'].currentValue) {
       this.loadContent(changes['fileToLoad'].currentValue);
     }
@@ -137,7 +137,7 @@ export class HtmlContentComponent implements OnInit, OnChanges {
   }
 
   openModalWindow(modalContent: any) {
-    console.log("Modal Content:", modalContent);
+    //console.log("Modal Content:", modalContent);
     this.modalWindow.openModalWindow(modalContent);
   }
 }
