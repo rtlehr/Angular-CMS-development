@@ -1,0 +1,75 @@
+<div class="prompt-builder-container">
+    <h2>AI Image Prompt Builder</h2>
+  
+    <form (ngSubmit)="generatePrompt()">
+      <label>Subject & Main Focus
+        <small class="hint">Clearly describe the primary subject. (e.g., "A hidden ancient city.")</small>
+      </label>
+      <input type="text" [(ngModel)]="promptDetails.subject" name="subject" required />
+  
+      <label>Detailed Description & Features
+        <small class="hint">Colors, textures, shapes, specific objects. (e.g., "Built into towering cliffs, lush vegetation.")</small>
+      </label>
+      <textarea [(ngModel)]="promptDetails.details" name="details" required></textarea>
+  
+      <label>Artistic Style or Inspiration
+        <small class="hint">Choose an art style or inspiration (e.g., Fantasy, Cyberpunk, Impressionism).</small>
+      </label>
+      <select [(ngModel)]="promptDetails.style" name="style" required>
+        <option value="">-- Select Artistic Style --</option>
+        <option *ngFor="let style of artisticStyles" [value]="style">{{ style }}</option>
+      </select>
+  
+      <label>Lighting & Mood
+        <small class="hint">Set the emotional atmosphere (e.g., Golden sunset, Dramatic shadows).</small>
+      </label>
+      <select [(ngModel)]="promptDetails.lighting" name="lighting" required>
+        <option value="">-- Select Lighting & Mood --</option>
+        <option *ngFor="let light of lightingMoods" [value]="light">{{ light }}</option>
+      </select>
+  
+      <label>Camera Angle & Composition
+        <small class="hint">Define perspective & framing (e.g., Wide-angle landscape, Close-up).</small>
+      </label>
+      <select [(ngModel)]="promptDetails.camera" name="camera" required>
+        <option value="">-- Select Camera Angle --</option>
+        <option *ngFor="let angle of cameraAngles" [value]="angle">{{ angle }}</option>
+      </select>
+  
+      <label>Environment & Context
+        <small class="hint">Surrounding context (e.g., Forest clearing, Snowy mountains).</small>
+      </label>
+      <textarea [(ngModel)]="promptDetails.environment" name="environment" required></textarea>
+  
+      <label>Technical Medium or Rendering Style
+        <small class="hint">Medium or rendering (e.g., Digital painting, Photorealistic render).</small>
+      </label>
+      <input type="text" [(ngModel)]="promptDetails.medium" name="medium" required />
+  
+      <label>Desired Quality & Resolution</label>
+      <select [(ngModel)]="promptDetails.quality" name="quality" required>
+        <option value="Standard">Standard</option>
+        <option value="Highly detailed">Highly detailed</option>
+        <option value="Ultra-high definition (4K/8K)">Ultra-high definition (4K/8K)</option>
+        <option value="Cinematic">Cinematic</option>
+      </select>
+  
+      <label>Negative Keywords (Optional)</label>
+      <small class="hint">Anything that should <strong>NOT</strong> be in the image</small>
+      <textarea [(ngModel)]="promptDetails.negative" name="negative"></textarea>
+  
+      <label>Additional Notes (Optional)</label>
+      <textarea [(ngModel)]="promptDetails.additionalNotes" name="additionalNotes"></textarea>
+  
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Generating...' : 'Generate Prompt' }}
+      </button>
+    </form>
+  
+    <div class="prompt-output" *ngIf="generatedPrompt">
+      <h3>Generated Prompt:</h3>
+      <p>{{ generatedPrompt }}</p>
+      <button (click)="copyPrompt()">Copy Prompt</button>
+    </div>
+  </div>
+  
