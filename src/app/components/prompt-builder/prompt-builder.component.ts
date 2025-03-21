@@ -21,7 +21,7 @@ export class PromptBuilderComponent {
     medium: '',
     quality: '',
     negative: '',
-    additionalNotes: ''
+    additionalNotes: '' 
   };
 
   artisticStyles: string[] = [
@@ -88,7 +88,7 @@ export class PromptBuilderComponent {
   generatePrompt() {
     this.isLoading = true;
 
-    const apiUrl = 'YOUR_BACKEND_ENDPOINT_URL';
+    const apiUrl = 'https://rosslehr.com/api/generate-prompt.php';
     const body = { ...this.promptDetails };
 
     const headers = new HttpHeaders({
