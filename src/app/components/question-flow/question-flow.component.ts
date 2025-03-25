@@ -124,5 +124,7 @@ export class QuestionFlowComponent implements OnInit, OnChanges {
       ? Math.round((this.answeredQuestions / this.totalQuestions) * 100)
       : 0;
   }
+
+  
   
 }
