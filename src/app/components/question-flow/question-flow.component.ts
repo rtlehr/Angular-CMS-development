@@ -39,7 +39,7 @@ export class QuestionFlowComponent implements OnInit, OnChanges {
   ngOnInit(): void {
    // if (this.fileToLoad) {
       //this.loadQuestions(this.fileToLoad);
-      this.loadQuestions('JSON/questions.json');
+      this.loadQuestions('JSON/questions-branching.json');
    // }
   }
 
@@ -110,4 +110,19 @@ export class QuestionFlowComponent implements OnInit, OnChanges {
       this.currentAnswer.push(option);
     }
   }
+
+  get totalQuestions(): number {
+    return Object.keys(this.questions).length;
+  }
+  
+  get answeredQuestions(): number {
+    return Object.keys(this.answers).length;
+  }
+  
+  get progress(): number {
+    return this.totalQuestions > 0
+      ? Math.round((this.answeredQuestions / this.totalQuestions) * 100)
+      : 0;
+  }
+  
 }

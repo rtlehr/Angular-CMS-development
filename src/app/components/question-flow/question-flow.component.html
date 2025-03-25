@@ -1,7 +1,31 @@
 <div class="container py-4">
-    <div class="card shadow-lg">
-      <div class="card-body" *ngIf="!isFinished()">
-        <h5 class="card-title">{{ questions[currentQuestionId].text }}</h5>
+    <div class="card shadow-lg animate__animated animate__fadeIn">
+      <div class="card-header d-flex justify-content-between align-items-center">
+
+        <div class="progress my-2" style="height: 8px; width: 100%;">
+            <div
+              class="progress-bar bg-info"
+              role="progressbar"
+              [style.width.%]="progress"
+              [attr.aria-valuenow]="progress"
+              aria-valuemin="0"
+              aria-valuemax="100">
+            </div>
+          </div>
+          
+          
+        <h5 class="mb-0">
+          <i class="bi bi-question-circle-fill me-2 text-primary"></i>
+          Question
+        </h5>
+        <small *ngIf="!isFinished()">
+            {{ answeredQuestions + 1 }} / {{ totalQuestions }}
+          </small>
+      </div>
+  
+      <div class="card-body" *ngIf="isReady && !isFinished()">
+        <h5 class="card-title">{{ questions[currentQuestionId]?.text }}</h5>
+  
         <div class="form-group mt-3">
           <!-- TEXTBOX -->
           <input *ngIf="questions[currentQuestionId]?.type === 'textbox'" type="text"
@@ -19,10 +43,10 @@
             <div *ngFor="let option of questions[currentQuestionId]?.options">
               <label class="form-check-label d-block">
                 <input type="radio"
-                       class="form-check-input"
-                       name="radioOptions"
-                       [value]="option"
-                       [(ngModel)]="currentAnswer"> {{ option }}
+                    class="form-check-input me-2"
+                    [name]="'radio-' + currentQuestionId"
+                    [value]="option"
+                    [(ngModel)]="currentAnswer"> {{ option }}
               </label>
             </div>
           </div>
@@ -32,7 +56,7 @@
             <div *ngFor="let option of questions[currentQuestionId]?.options">
               <label class="form-check-label d-block">
                 <input type="checkbox"
-                       class="form-check-input"
+                       class="form-check-input me-2"
                        [checked]="currentAnswer?.includes(option)"
                        (change)="toggleCheckbox(option)"> {{ option }}
               </label>
@@ -43,19 +67,25 @@
           <select *ngIf="questions[currentQuestionId]?.type === 'dropdown'"
                   class="form-control"
                   [(ngModel)]="currentAnswer">
-            <option value="" disabled selected>Select one</option>
+            <option value="" disabled>Select one</option>
             <option *ngFor="let option of questions[currentQuestionId]?.options" [value]="option">{{ option }}</option>
           </select>
         </div>
   
-        <button class="btn btn-primary mt-4"
-                [disabled]="!isAnswered()"
-                (click)="nextQuestion()">Next</button>
+        <div class="mt-4 d-flex justify-content-end">
+          <button class="btn btn-outline-primary"
+                  [disabled]="!isAnswered()"
+                  (click)="nextQuestion()">
+            Next <i class="bi bi-arrow-right ms-2"></i>
+          </button>
+        </div>
       </div>
   
-      <!-- RESULTS (for development) -->
       <div class="card-body" *ngIf="isFinished()">
-        <h5>All Answers</h5>
+        <h5 class="text-success">
+          <i class="bi bi-check-circle-fill me-2"></i>Thank you!
+        </h5>
+        <p>Your answers:</p>
         <pre>{{ answers | json }}</pre>
       </div>
     </div>

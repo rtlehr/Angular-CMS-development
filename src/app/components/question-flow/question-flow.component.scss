@@ -1,14 +1,33 @@
 .card {
-    border-radius: 1rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    background: #fff;
+    transition: all 0.4s ease;
   }
   
   .card-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   
-  .form-check-label {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+  .form-group {
+    margin-top: 1.25rem;
+  }
+  
+  button.btn-primary {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  button.btn-primary:not(:disabled):hover {
+    transform: scale(1.02);
   }
   

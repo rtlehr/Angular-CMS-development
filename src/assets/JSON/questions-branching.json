@@ -1,0 +1,60 @@
+[
+    {
+      "id": "q1",
+      "text": "What's your name?",
+      "type": "textbox",
+      "required": true,
+      "next": { "default": "q2" }
+    },
+    {
+      "id": "q2",
+      "text": "What type of device are you using?",
+      "type": "radio",
+      "options": ["Phone", "Tablet", "Computer"],
+      "required": true,
+      "next": {
+        "Phone": "q3",
+        "Tablet": "q4",
+        "Computer": "q5"
+      }
+    },
+    {
+      "id": "q3",
+      "text": "What phone brand do you use?",
+      "type": "dropdown",
+      "options": ["Apple", "Samsung", "Google", "Other"],
+      "required": false,
+      "next": { "default": "q6" }
+    },
+    {
+      "id": "q4",
+      "text": "Do you use your tablet for work?",
+      "type": "radio",
+      "options": ["Yes", "No"],
+      "required": true,
+      "next": { "default": "q6" }
+    },
+    {
+      "id": "q5",
+      "text": "Select your primary use cases:",
+      "type": "checkbox",
+      "options": ["Browsing", "Gaming", "Work", "Streaming"],
+      "required": true,
+      "next": { "default": "q6" }
+    },
+    {
+      "id": "q6",
+      "text": "Any additional comments?",
+      "type": "textarea",
+      "required": false,
+      "next": { "default": "q7" }
+    },
+    {
+      "id": "q7",
+      "text": "Do you agree to submit your answers?",
+      "type": "radio",
+      "options": ["Yes", "No"],
+      "required": true
+    }
+  ]
+  
