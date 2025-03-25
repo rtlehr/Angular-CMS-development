@@ -1,0 +1,63 @@
+<div class="container py-4">
+    <div class="card shadow-lg">
+      <div class="card-body" *ngIf="!isFinished()">
+        <h5 class="card-title">{{ questions[currentQuestionId].text }}</h5>
+        <div class="form-group mt-3">
+          <!-- TEXTBOX -->
+          <input *ngIf="questions[currentQuestionId]?.type === 'textbox'" type="text"
+                 class="form-control"
+                 [(ngModel)]="currentAnswer">
+  
+          <!-- TEXTAREA -->
+          <textarea *ngIf="questions[currentQuestionId]?.type === 'textarea'"
+                    class="form-control"
+                    rows="4"
+                    [(ngModel)]="currentAnswer"></textarea>
+  
+          <!-- RADIO -->
+          <div *ngIf="questions[currentQuestionId]?.type === 'radio'">
+            <div *ngFor="let option of questions[currentQuestionId]?.options">
+              <label class="form-check-label d-block">
+                <input type="radio"
+                       class="form-check-input"
+                       name="radioOptions"
+                       [value]="option"
+                       [(ngModel)]="currentAnswer"> {{ option }}
+              </label>
+            </div>
+          </div>
+  
+          <!-- CHECKBOX -->
+          <div *ngIf="questions[currentQuestionId]?.type === 'checkbox'">
+            <div *ngFor="let option of questions[currentQuestionId]?.options">
+              <label class="form-check-label d-block">
+                <input type="checkbox"
+                       class="form-check-input"
+                       [checked]="currentAnswer?.includes(option)"
+                       (change)="toggleCheckbox(option)"> {{ option }}
+              </label>
+            </div>
+          </div>
+  
+          <!-- DROPDOWN -->
+          <select *ngIf="questions[currentQuestionId]?.type === 'dropdown'"
+                  class="form-control"
+                  [(ngModel)]="currentAnswer">
+            <option value="" disabled selected>Select one</option>
+            <option *ngFor="let option of questions[currentQuestionId]?.options" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+  
+        <button class="btn btn-primary mt-4"
+                [disabled]="!isAnswered()"
+                (click)="nextQuestion()">Next</button>
+      </div>
+  
+      <!-- RESULTS (for development) -->
+      <div class="card-body" *ngIf="isFinished()">
+        <h5>All Answers</h5>
+        <pre>{{ answers | json }}</pre>
+      </div>
+    </div>
+  </div>
+  

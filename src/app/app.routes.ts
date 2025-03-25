@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HtmlEditorComponent } from './components/html-content/html-editor/html-editor.component';
 import { ContentWithMenuComponent } from './components/contentDisplay/content-with-menu/content-with-menu.component';
 import { PromptBuilderComponent } from './components/prompt-builder/prompt-builder.component';
+import { QuestionFlowComponent } from './components/question-flow/question-flow.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -113,6 +114,13 @@ export const routes: Routes = [
     path: 'prompt-builder',
     component: PromptBuilderComponent,
     title: 'Prompt Builder',
+    data: { menu: true, pageContent: [] }
+  },
+
+  {
+    path: 'question-flow',
+    component: QuestionFlowComponent,
+    title: 'Question Flow',
     data: { menu: true, pageContent: [] }
   },
 

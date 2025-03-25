@@ -1,0 +1,53 @@
+[
+    {
+      "id": "q1",
+      "text": "What is your name?",
+      "type": "textbox",
+      "required": true,
+      "next": { "default": "q2" }
+    },
+    {
+      "id": "q2",
+      "text": "What is your favorite color?",
+      "type": "dropdown",
+      "options": ["Red", "Blue", "Green", "Other"],
+      "required": false,
+      "next": {
+        "Red": "q3",
+        "Blue": "q3",
+        "Green": "q4",
+        "Other": "q5",
+        "default": "q3"
+      }
+    },
+    {
+      "id": "q3",
+      "text": "Why do you like this color?",
+      "type": "textarea",
+      "required": false,
+      "next": { "default": "q6" }
+    },
+    {
+      "id": "q4",
+      "text": "Pick your favorite fruits",
+      "type": "checkbox",
+      "options": ["Apple", "Banana", "Orange"],
+      "required": true,
+      "next": { "default": "q6" }
+    },
+    {
+      "id": "q5",
+      "text": "Please specify your favorite color",
+      "type": "textbox",
+      "required": true,
+      "next": { "default": "q6" }
+    },
+    {
+      "id": "q6",
+      "text": "Do you agree to submit this information?",
+      "type": "radio",
+      "options": ["Yes", "No"],
+      "required": true
+    }
+  ]
+  
